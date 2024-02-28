@@ -1,5 +1,3 @@
--- Active: 1709007112642@@147.139.210.135@5432@muhabby01@public
-
 CREATE TABLE recipe (
     id VARCHAR UNIQUE PRIMARY KEY, title VARCHAR NOT NULL, ingredient TEXT NOT NULL, photo VARCHAR DEFAULT NULL, created_at DATE
 )
