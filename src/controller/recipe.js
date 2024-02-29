@@ -1,4 +1,5 @@
-const { getRecipeModel, getRecipeByIdModel } = require('../model/recipe')
+const { v4: uuidv4 } = require('uuid')
+const { getRecipeModel, getRecipeByIdModel, createRecipe } = require('../model/recipe')
 
 const RecipeController = {
     getRecipe: async (req, res, next) => {
@@ -7,7 +8,7 @@ const RecipeController = {
             let result = recipe.rows
             return res.status(200).json({ message: 'Success getRecipe', data: result })
         } catch (err) {
-            console.log('recipe controller error')
+            console.log('getRecipe error')
             console.log(err)
             return res.status(404).json({ message: 'Failed getRecipe' })
         }
@@ -26,9 +27,29 @@ const RecipeController = {
             }
             return res.status(200).json({ message: 'Success getRecipeById', data: result[0] })
         } catch (err) {
-            console.log('recipe controller error')
+            console.log('getRecipeById error')
             console.log(err)
             return res.status(404).json({ message: 'Failed getRecipeByIdcipe' })
+        }
+    },
+
+    inputRecipe: async (req, res, next) => {
+        try {
+            let { title, ingredient, photo } = req.body
+            if (!title || title === "" || !ingredient || ingredient === "" || !photo || photo === "") {
+                return res.json({ code: 404, message: "Input invalid" });
+            }
+            let data = { id: uuidv4(), title, ingredient, photo }
+            let result = await createRecipe(data)
+            if (result.rowCount === 1) {
+                return res.status(201).json({ code: 201, message: "Success input data" })
+            }
+            return res.status(401).json({ code: 401, message: "Failed input data" })
+        }
+        catch (err) {
+            console.log('inputRecipe error')
+            console.log(err)
+            return res.status(404).json({ message: 'Failed inputRecipe' })
         }
     }
 }

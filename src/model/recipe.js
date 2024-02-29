@@ -30,4 +30,22 @@ const getRecipeByIdModel = async (id) => {
     )
 }
 
-module.exports = { getRecipeModel, getRecipeByIdModel }
+const createRecipe = async (data) => {
+    console.log("model - getRecipeById")
+    let { id, title, ingredient, photo } = data
+    console.log(data)
+    return new Promise((resolve, reject) =>
+        Pool.query(`INSERT INTO recipe (id, title, ingredient, photo, created_at) VALUES (
+            '${id}', '${title}', '${ingredient}', '${photo}', NOW());`, (err, res) => {
+            if (!err) {
+                return resolve(res)
+            }
+            else {
+                console.log('error db -', err)
+                reject(err)
+            }
+        })
+    )
+}
+
+module.exports = { getRecipeModel, getRecipeByIdModel, createRecipe }

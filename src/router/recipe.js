@@ -4,5 +4,6 @@ const router = express.Router()
 
 router.get('/', RecipeController.getRecipe)
 router.get('/:id', RecipeController.getRecipeById)
+router.post('/', RecipeController.inputRecipe)
 
 module.exports = router
