@@ -5,5 +5,6 @@ const router = express.Router()
 router.get('/', RecipeController.getRecipe)
 router.get('/:id', RecipeController.getRecipeById)
 router.post('/', RecipeController.inputRecipe)
+router.put('/:id', RecipeController.putRecipe)
 
 module.exports = router

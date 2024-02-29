@@ -48,4 +48,21 @@ const createRecipe = async (data) => {
     )
 }
 
-module.exports = { getRecipeModel, getRecipeByIdModel, createRecipe }
+const updateRecipe = async (data) => {
+    console.log("model - updateRecipe")
+    let { id, title, ingredient, photo } = data
+    console.log(data)
+    return new Promise((resolve, reject) =>
+        Pool.query(`UPDATE recipe SET updated_at=NOW(), title='${title}', ingredient='${ingredient}', photo='${photo}' WHERE id='${id}';`, (err, res) => {
+            if (!err) {
+                return resolve(res)
+            }
+            else {
+                console.log('error db -', err)
+                reject(err)
+            }
+        })
+    )
+}
+
+module.exports = { getRecipeModel, getRecipeByIdModel, createRecipe, updateRecipe }

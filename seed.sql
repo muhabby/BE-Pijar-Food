@@ -11,6 +11,20 @@ VALUES (
         '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'egg yolk', 'egg, salt, oil', 'https://placehold.co/600x400', NOW()
     );
 
+ALTER TABLE recipe ADD COLUMN updated_at TIMESTAMP;
+
 ALTER TABLE recipe ALTER COLUMN created_at TYPE TIMESTAMP;
+
+UPDATE recipe SET updated_at = NOW();
+
+SELECT title, EXTRACT(
+        DAY
+        FROM created_at
+    ) as create, EXTRACT(
+        DAY
+        FROM updated_at
+    ) as
+update
+FROM recipe;
 
 SELECT * FROM recipe;
