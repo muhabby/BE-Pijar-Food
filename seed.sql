@@ -27,4 +27,11 @@ SELECT title, EXTRACT(
 update
 FROM recipe;
 
+DELETE FROM recipe WHERE id = '3e3e4aab-434f-4213-9398-5551d367007f';
+
 SELECT * FROM recipe;
+
+SELECT *
+FROM recipe
+WHERE
+    id = '3e3e4aab-434f-4213-9398-5551d367007f';

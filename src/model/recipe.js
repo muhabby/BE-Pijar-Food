@@ -65,4 +65,19 @@ const updateRecipe = async (data) => {
     )
 }
 
-module.exports = { getRecipeModel, getRecipeByIdModel, createRecipe, updateRecipe }
+const deleteRecipe = async (id) => {
+    console.log("model - deleteRecipe")
+    return new Promise((resolve, reject) =>
+        Pool.query(`DELETE FROM recipe WHERE id='${id}';`, (err, res) => {
+            if (!err) {
+                return resolve(res)
+            }
+            else {
+                console.log('error db -', err)
+                reject(err)
+            }
+        })
+    )
+}
+
+module.exports = { getRecipeModel, getRecipeByIdModel, createRecipe, updateRecipe, deleteRecipe }

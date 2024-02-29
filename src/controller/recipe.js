@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require('uuid')
-const { getRecipeModel, getRecipeByIdModel, createRecipe, updateRecipe } = require('../model/recipe')
+const { getRecipeModel, getRecipeByIdModel, createRecipe, updateRecipe, deleteRecipe } = require('../model/recipe')
 
 const RecipeController = {
     getRecipe: async (req, res, next) => {
@@ -68,6 +68,8 @@ const RecipeController = {
             if (!resultRecipe.length) {
                 return res.status(404).json({ message: 'Recipe not found or id invalid' })
             }
+
+            // Execute
             let newRecipe = resultRecipe[0]
             let data = {
                 id,
@@ -75,7 +77,6 @@ const RecipeController = {
                 ingredient: ingredient || newRecipe.ingredient,
                 photo: photo || newRecipe.photo
             }
-
             let result = await updateRecipe(data)
             if (result.rowCount === 1) {
                 return res.status(201).json({ code: 201, message: "Success update data" })
@@ -86,6 +87,34 @@ const RecipeController = {
             console.log('putRecipe error')
             console.log(err)
             return res.status(404).json({ message: 'Failed putRecipe' })
+        }
+    },
+
+    dropRecipe: async (req, res, next) => {
+        try {
+            // Check params and body
+            let { id } = req.params
+            if (id === '') {
+                return res.status(404).json({ message: 'Params id invalid' })
+            }
+
+            // Check recipe
+            let recipe = await getRecipeByIdModel(id)
+            let resultRecipe = recipe.rows
+            if (!resultRecipe.length) {
+                return res.status(404).json({ message: 'Recipe not found or id invalid' })
+            }
+
+            let result = await deleteRecipe(id)
+            if (result.rowCount === 1) {
+                return res.status(200).json({ code: 200, message: "Success delete data" });
+            }
+            return res.status(404).json({ code: 404, message: "Failed delete data" });
+        }
+        catch (err) {
+            console.log('dropRecipe error')
+            console.log(err)
+            return res.status(404).json({ message: 'Failed dropRecipe' })
         }
     }
 }
