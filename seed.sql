@@ -31,7 +31,35 @@ DELETE FROM recipe WHERE id = '3e3e4aab-434f-4213-9398-5551d367007f';
 
 SELECT * FROM recipe;
 
+SELECT * FROM recipe WHERE ingredient ILIKE '%egg%';
+
+SELECT * FROM recipe WHERE title LIKE 'fried egg';
+
 SELECT *
 FROM recipe
 WHERE
-    id = '3e3e4aab-434f-4213-9398-5551d367007f';
+    ingredient ILIKE '%egg%'
+ORDER BY created_at ASC;
+
+SELECT *
+FROM recipe
+WHERE
+    ingredient ILIKE '%egg%'
+ORDER BY updated_at DESC;
+
+SELECT * FROM recipe ORDER BY created_at DESC LIMIT 3;
+
+SELECT * FROM recipe ORDER BY created_at DESC LIMIT 3 OFFSET 5;
+
+SELECT COUNT(*) FROM recipe;
+
+SELECT COUNT(*) FROM recipe WHERE title ILIKE '%fried%';
+
+SELECT *
+FROM recipe
+WHERE
+    ingredient ILIKE '%egg%'
+ORDER BY created_at ASC
+LIMIT 3
+OFFSET
+    5;
