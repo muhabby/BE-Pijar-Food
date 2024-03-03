@@ -3,7 +3,7 @@ const UsersController = require('../controller/users')
 const router = express.Router()
 
 router.get('/', UsersController.getUsers)
-router.get('/', UsersController.searchUsers)
+router.get('/detail', UsersController.searchUsers)
 router.get('/:user_id', UsersController.getUsersById)
 router.post('/', UsersController.inputUsers)
 router.put('/:user_id', UsersController.updateUsers)

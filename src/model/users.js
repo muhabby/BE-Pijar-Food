@@ -86,7 +86,7 @@ const updateUsersModel = async (data) => {
     let { user_id, full_name, email, password, profile_picture, about_me } = data
     console.log(data)
     return new Promise((resolve, reject) =>
-        Pool.query(`UPDATE users SET user_id='${user_id}', full_name='${full_name}', email='${email}', password='${password}', profile_picture='${profile_picture}', about_me='${about_me}'
+        Pool.query(`UPDATE users SET updated_date=NOW(), user_id='${user_id}', full_name='${full_name}', email='${email}', password='${password}', profile_picture='${profile_picture}', about_me='${about_me}'
         WHERE user_id='${user_id}';`, (err, res) => {
             if (!err) {
                 return resolve(res)

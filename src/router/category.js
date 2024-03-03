@@ -1,12 +1,12 @@
 const express = require('express')
-const RecipeController = require('../controller/recipe')
+const CategoryController = require('../controller/category')
 const router = express.Router()
 
-router.get('/', RecipeController.getRecipe)
-router.get('/detail', RecipeController.searchRecipe)
-router.get('/:id', RecipeController.getRecipeById)
-router.post('/', RecipeController.inputRecipe)
-router.put('/:id', RecipeController.updateRecipe)
-router.delete('/:id', RecipeController.deleteRecipe)
+router.get('/', CategoryController.getCategory)
+router.get('/detail', CategoryController.searchCategory)
+router.get('/:id', CategoryController.getCategoryById)
+router.post('/', CategoryController.inputCategory)
+router.put('/:id', CategoryController.updateCategory)
+router.delete('/:id', CategoryController.deleteCategory)
 
 module.exports = router

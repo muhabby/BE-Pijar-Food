@@ -53,7 +53,7 @@ const usersController = {
             // Check searchBy
             let searchBy
             if (req.query.searchBy === "") {
-                if (req.query.searchBy !== "full_name" || req.query.searchBy !== "email") {
+                if (req.query.searchBy !== "full_name") {
                     searchBy = req.query.searchBy
                 }
                 else {

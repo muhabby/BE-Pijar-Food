@@ -1,10 +1,10 @@
 const Pool = require('../config/db')
 
 
-const getRecipeModel = async () => {
-    console.log("model - getRecipeModel")
+const getCategoryModel = async () => {
+    console.log("model - getCategoryModel")
     return new Promise((resolve, reject) =>
-        Pool.query(`SELECT * FROM recipe`, (err, res) => {
+        Pool.query(`SELECT * FROM category`, (err, res) => {
             if (!err) {
                 return resolve(res)
             }
@@ -16,10 +16,10 @@ const getRecipeModel = async () => {
     )
 }
 
-const getRecipeByIdModel = async (id) => {
-    console.log("model - getRecipeById")
+const getCategoryByIdModel = async (id) => {
+    console.log("model - getCategoryById")
     return new Promise((resolve, reject) =>
-        Pool.query(`SELECT * FROM recipe WHERE id = '${id}'`, (err, res) => {
+        Pool.query(`SELECT * FROM category WHERE id = '${id}'`, (err, res) => {
             if (!err) {
                 return resolve(res)
             }
@@ -31,11 +31,11 @@ const getRecipeByIdModel = async (id) => {
     )
 }
 
-const searchRecipeDetailModel = async (data) => {
+const searchCategoryDetailModel = async (data) => {
     let { searchBy, search, sortBy, sort, limit, page } = data
-    console.log("model - getRecipeDetailModel")
+    console.log("model - getCategoryDetailModel")
     return new Promise((resolve, reject) =>
-        Pool.query(`SELECT * FROM recipe WHERE ${searchBy} ILIKE '%${search}%' ORDER BY ${sortBy} ${sort} LIMIT ${limit} OFFSET ${page}`, (err, res) => {
+        Pool.query(`SELECT * FROM category WHERE ${searchBy} ILIKE '%${search}%' ORDER BY ${sortBy} ${sort} LIMIT ${limit} OFFSET ${page}`, (err, res) => {
             if (!err) {
                 return resolve(res)
             }
@@ -47,11 +47,11 @@ const searchRecipeDetailModel = async (data) => {
     )
 }
 
-const searchRecipeCountModel = async (data) => {
+const searchCategoryCountModel = async (data) => {
     let { searchBy, search } = data
-    console.log("model - getRecipeDetailCountModel")
+    console.log("model - getCategoryDetailCountModel")
     return new Promise((resolve, reject) =>
-        Pool.query(`SELECT * FROM recipe WHERE ${searchBy} ILIKE '%${search}%'`, (err, res) => {
+        Pool.query(`SELECT * FROM category WHERE ${searchBy} ILIKE '%${search}%'`, (err, res) => {
             if (!err) {
                 return resolve(res)
             }
@@ -63,13 +63,13 @@ const searchRecipeCountModel = async (data) => {
     )
 }
 
-const inputRecipeModel = async (data) => {
-    console.log("model - getRecipeById")
-    let { id, title, ingredient, photo } = data
+const inputCategoryModel = async (data) => {
+    console.log("model - getCategoryById")
+    let { id, name, description, picture } = data
     console.log(data)
     return new Promise((resolve, reject) =>
-        Pool.query(`INSERT INTO recipe (id, title, ingredient, photo, created_at) VALUES (
-            '${id}', '${title}', '${ingredient}', '${photo}', NOW());`, (err, res) => {
+        Pool.query(`INSERT INTO category (id, name, description, picture, created_at, updated_at) VALUES (
+            '${id}', '${name}', '${description}', '${picture}', NOW(), NOW());`, (err, res) => {
             if (!err) {
                 return resolve(res)
             }
@@ -81,12 +81,12 @@ const inputRecipeModel = async (data) => {
     )
 }
 
-const updateRecipeModel = async (data) => {
-    console.log("model - updateRecipe")
-    let { id, title, ingredient, photo } = data
+const updateCategoryModel = async (data) => {
+    console.log("model - updateCategory")
+    let { id, name, description, picture } = data
     console.log(data)
     return new Promise((resolve, reject) =>
-        Pool.query(`UPDATE recipe SET updated_at=NOW(), title='${title}', ingredient='${ingredient}', photo='${photo}' WHERE id='${id}';`, (err, res) => {
+        Pool.query(`UPDATE category SET updated_at=NOW(), name='${name}', description='${description}', picture='${picture}' WHERE id='${id}';`, (err, res) => {
             if (!err) {
                 return resolve(res)
             }
@@ -98,10 +98,10 @@ const updateRecipeModel = async (data) => {
     )
 }
 
-const deleteRecipeModel = async (id) => {
-    console.log("model - deleteRecipe")
+const deleteCategoryModel = async (id) => {
+    console.log("model - deleteCategory")
     return new Promise((resolve, reject) =>
-        Pool.query(`DELETE FROM recipe WHERE id='${id}';`, (err, res) => {
+        Pool.query(`DELETE FROM category WHERE id='${id}';`, (err, res) => {
             if (!err) {
                 return resolve(res)
             }
@@ -113,4 +113,4 @@ const deleteRecipeModel = async (id) => {
     )
 }
 
-module.exports = { getRecipeModel, getRecipeByIdModel, searchRecipeDetailModel, searchRecipeCountModel, inputRecipeModel, updateRecipeModel, deleteRecipeModel }
+module.exports = { getCategoryModel, getCategoryByIdModel, searchCategoryDetailModel, searchCategoryCountModel, inputCategoryModel, updateCategoryModel, deleteCategoryModel }
