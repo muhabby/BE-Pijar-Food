@@ -66,17 +66,18 @@ const RecipeController = {
 
             // Check sortBy
             let sortBy
-            if (req.query.sortBy === "") {
-                if (req.query.sortBy !== "created_at" || req.query.sortBy !== "updated_at") {
-                    sortBy = req.query.sortBy
-                }
-                else {
-                    sortBy = "created_at"
-                }
-            }
-            else {
-                sortBy = "created_at"
-            }
+            sortBy = req.query.sortBy
+            // if (req.query.sortBy === "") {
+            //     if (req.query.sortBy !== "created_at" || req.query.sortBy !== "updated_at") {
+            //         sortBy = req.query.sortBy
+            //     }
+            //     else {
+            //         sortBy = "created_at"
+            //     }
+            // }
+            // else {
+            //     sortBy = "created_at"
+            // }
 
             // Check sort
             let sort
