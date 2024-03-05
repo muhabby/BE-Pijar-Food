@@ -8,7 +8,7 @@ const {
     updateCategoryModel,
     deleteCategoryModel
 } = require('../model/category')
-const { search } = require('../router')
+// const { search } = require('../router')
 
 const categoryController = {
     getCategory: async (req, res, next) => {
