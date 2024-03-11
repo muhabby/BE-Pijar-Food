@@ -28,13 +28,13 @@ const usersController = {
     getUsersById: async (req, res, next) => {
         try {
             // Check params
-            let { user_id } = req.params
-            if (user_id === '') {
+            let { id } = req.params
+            if (id === '') {
                 return res.status(404).json({ message: 'Params id invalid' })
             }
 
             // Process
-            let users = await getUsersByIdModel(user_id)
+            let users = await getUsersByIdModel(id)
             let result = users.rows
             if (!result.length) {
                 return res.status(404).json({ message: 'Users not found or id invalid' })
@@ -67,15 +67,15 @@ const usersController = {
             // Check sortBy
             let sortBy
             if (req.query.sortBy === "") {
-                if (req.query.sortBy !== "regist_date") {
+                if (req.query.sortBy !== "creates_at") {
                     sortBy = req.query.sortBy
                 }
                 else {
-                    sortBy = "regist_date"
+                    sortBy = "created_at"
                 }
             }
             else {
-                sortBy = "regist_date"
+                sortBy = "created_at"
             }
 
             // Check sort
@@ -132,13 +132,13 @@ const usersController = {
     inputUsers: async (req, res, next) => {
         try {
             // Check body
-            let { full_name, email, password, profile_picture, about_me } = req.body
-            if (!full_name || full_name === "" || !email || email === "" || !password || password === "" || !profile_picture || profile_picture === "" || !about_me || about_me === "") {
+            let { full_name, email, password, profile_picture, bio } = req.body
+            if (!full_name || full_name === "" || !email || email === "" || !password || password === "" || !profile_picture || profile_picture === "" || !bio || bio === "") {
                 return res.json({ code: 404, message: "Input invalid" });
             }
 
             // Process
-            let data = { user_id: uuidv4(), full_name, email, password, profile_picture, about_me }
+            let data = { id: uuidv4(), full_name, email, password, profile_picture, bio }
             let result = await inputUsersModel(data)
             if (result.rowCount === 1) {
                 return res.status(201).json({ code: 201, message: "Success input data" })
@@ -155,14 +155,14 @@ const usersController = {
     updateUsers: async (req, res, next) => {
         try {
             // Check params and body
-            let { user_id } = req.params
-            if (user_id === '') {
+            let { id } = req.params
+            if (id === '') {
                 return res.status(404).json({ message: 'Params id invalid' })
             }
-            let { full_name, email, password, profile_picture, about_me } = req.body
+            let { full_name, email, password, profile_picture, bio } = req.body
 
             // Check Users
-            let users = await getUsersByIdModel(user_id)
+            let users = await getUsersByIdModel(id)
             let resultUsers = users.rows
             if (!resultUsers.length) {
                 return res.status(404).json({ message: 'Users not found or id invalid' })
@@ -171,12 +171,12 @@ const usersController = {
             // Process
             let newUsers = resultUsers[0]
             let data = {
-                user_id,
+                id,
                 full_name: full_name || newUsers.full_name,
                 email: email || newUsers.email,
                 password: password || newUsers.password,
                 profile_picture: profile_picture || newUsers.profile_picture,
-                about_me: about_me || newUsers.about_me,
+                bio: bio || newUsers.bio,
             }
             let result = await updateUsersModel(data)
             if (result.rowCount === 1) {
@@ -194,20 +194,20 @@ const usersController = {
     deleteUsers: async (req, res, next) => {
         try {
             // Check params
-            let { user_id } = req.params
-            if (user_id === '') {
+            let { id } = req.params
+            if (id === '') {
                 return res.status(404).json({ message: 'Params id invalid' })
             }
 
             // Check Users
-            let users = await getUsersByIdModel(user_id)
+            let users = await getUsersByIdModel(id)
             let resultUsers = users.rows
             if (!resultUsers.length) {
                 return res.status(404).json({ message: 'Users not found or id invalid' })
             }
 
             // Process
-            let result = await deleteUsersModel(user_id)
+            let result = await deleteUsersModel(id)
             if (result.rowCount === 1) {
                 return res.status(200).json({ code: 200, message: "Success delete data" });
             }

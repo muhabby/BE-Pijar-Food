@@ -16,10 +16,10 @@ const getUsersModel = async () => {
     )
 }
 
-const getUsersByIdModel = async (user_id) => {
+const getUsersByIdModel = async (id) => {
     console.log("model - getUsersById")
     return new Promise((resolve, reject) =>
-        Pool.query(`SELECT * FROM users WHERE user_id = '${user_id}'`, (err, res) => {
+        Pool.query(`SELECT * FROM users WHERE id = '${id}'`, (err, res) => {
             if (!err) {
                 return resolve(res)
             }
@@ -65,11 +65,11 @@ const searchUsersCountModel = async (data) => {
 
 const inputUsersModel = async (data) => {
     console.log("model - getUsersById")
-    let { user_id, full_name, email, password, profile_picture, about_me, regist_date } = data
+    let { id, full_name, email, password, profile_picture, bio } = data
     console.log(data)
     return new Promise((resolve, reject) =>
-        Pool.query(`INSERT INTO users (user_id, full_name, email, password, profile_picture, about_me, regist_date) VALUES (
-            '${user_id}', '${full_name}', '${email}', '${password}', '${profile_picture}', '${about_me}', NOW());`, (err, res) => {
+        Pool.query(`INSERT INTO users (id, full_name, email, password, profile_picture, bio, created_at) VALUES (
+            '${id}', '${full_name}', '${email}', '${password}', '${profile_picture}', '${bio}', NOW());`, (err, res) => {
             if (!err) {
                 return resolve(res)
             }
@@ -83,11 +83,11 @@ const inputUsersModel = async (data) => {
 
 const updateUsersModel = async (data) => {
     console.log("model - updateUsers")
-    let { user_id, full_name, email, password, profile_picture, about_me } = data
+    let { id, full_name, email, password, profile_picture, bio } = data
     console.log(data)
     return new Promise((resolve, reject) =>
-        Pool.query(`UPDATE users SET updated_date=NOW(), user_id='${user_id}', full_name='${full_name}', email='${email}', password='${password}', profile_picture='${profile_picture}', about_me='${about_me}'
-        WHERE user_id='${user_id}';`, (err, res) => {
+        Pool.query(`UPDATE users SET updated_at=NOW(), id='${id}', full_name='${full_name}', email='${email}', password='${password}', profile_picture='${profile_picture}', bio='${bio}'
+        WHERE id='${id}';`, (err, res) => {
             if (!err) {
                 return resolve(res)
             }
@@ -99,10 +99,10 @@ const updateUsersModel = async (data) => {
     )
 }
 
-const deleteUsersModel = async (user_id) => {
+const deleteUsersModel = async (id) => {
     console.log("model - deleteUsers")
     return new Promise((resolve, reject) =>
-        Pool.query(`DELETE FROM users WHERE user_id='${user_id}';`, (err, res) => {
+        Pool.query(`DELETE FROM users WHERE id='${id}';`, (err, res) => {
             if (!err) {
                 return resolve(res)
             }

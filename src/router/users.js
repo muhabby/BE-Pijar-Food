@@ -4,9 +4,9 @@ const router = express.Router()
 
 router.get('/', UsersController.getUsers)
 router.get('/detail', UsersController.searchUsers)
-router.get('/:user_id', UsersController.getUsersById)
+router.get('/:id', UsersController.getUsersById)
 router.post('/', UsersController.inputUsers)
-router.put('/:user_id', UsersController.updateUsers)
-router.delete('/:user_id', UsersController.deleteUsers)
+router.put('/:id', UsersController.updateUsers)
+router.delete('/:id', UsersController.deleteUsers)
 
 module.exports = router
