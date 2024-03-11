@@ -8,7 +8,6 @@ const {
     updateCategoryModel,
     deleteCategoryModel
 } = require('../model/category')
-// const { search } = require('../router')
 
 const categoryController = {
     getCategory: async (req, res, next) => {
@@ -138,7 +137,7 @@ const categoryController = {
             }
 
             // Process
-            let data = { id: uuidv4(), name, description, picture }
+            let data = { name, description, picture }
             let result = await inputCategoryModel(data)
             if (result.rowCount === 1) {
                 return res.status(201).json({ code: 201, message: "Success input data" })

@@ -8,7 +8,6 @@ const {
     updateUsersModel,
     deleteUsersModel
 } = require('../model/users')
-// const { search } = require('../router')
 
 const usersController = {
     getUsers: async (req, res, next) => {

@@ -65,11 +65,11 @@ const searchCategoryCountModel = async (data) => {
 
 const inputCategoryModel = async (data) => {
     console.log("model - getCategoryById")
-    let { id, name, description, picture } = data
+    let { name, description, picture } = data
     console.log(data)
     return new Promise((resolve, reject) =>
-        Pool.query(`INSERT INTO category (id, name, description, picture, created_at, updated_at) VALUES (
-            '${id}', '${name}', '${description}', '${picture}', NOW(), NOW());`, (err, res) => {
+        Pool.query(`INSERT INTO category (name, description, picture, created_at, updated_at) VALUES (
+            '${name}', '${description}', '${picture}', NOW(), NOW());`, (err, res) => {
             if (!err) {
                 return resolve(res)
             }

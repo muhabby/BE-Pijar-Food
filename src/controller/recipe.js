@@ -6,9 +6,10 @@ const {
     searchRecipeCountModel,
     inputRecipeModel,
     updateRecipeModel,
-    deleteRecipeModel
+    deleteRecipeModel,
+    getCategoryByIdModel,
+    getUsersByIdModel
 } = require('../model/recipe')
-// const { search } = require('../router')
 
 const RecipeController = {
     getRecipe: async (req, res, next) => {
@@ -133,13 +134,30 @@ const RecipeController = {
     inputRecipe: async (req, res, next) => {
         try {
             // Check body
-            let { title, ingredient, photo } = req.body
-            if (!title || title === "" || !ingredient || ingredient === "" || !photo || photo === "") {
+            let { title, ingredient, photo, category_id, user_id } = req.body
+            if (!title || title === "" || !ingredient || ingredient === "" || !photo || photo === "" || !category_id || category_id === "" || !user_id || user_id === "") {
                 return res.json({ code: 404, message: "Input invalid" });
+            }
+            
+            // Convert category_id to integers
+            category_id = parseInt(category_id);
+            
+            // Check category id
+            let category = await getCategoryByIdModel(category_id)
+            let resultCategory = category.rows
+            if (!resultCategory.length) {
+                return res.status(404).json({ message: 'Category not found' })
+            }
+
+            // Check user id
+            let user = await getUsersByIdModel(user_id)
+            let resultUser = user.rows
+            if (!resultUser.length) {
+                return res.status(404).json({ message: 'User not found' })
             }
 
             // Process
-            let data = { id: uuidv4(), title, ingredient, photo }
+            let data = { id: uuidv4(), title, ingredient, photo, category_id, user_id }
             let result = await inputRecipeModel(data)
             if (result.rowCount === 1) {
                 return res.status(201).json({ code: 201, message: "Success input data" })
@@ -152,6 +170,7 @@ const RecipeController = {
             return res.status(404).json({ message: 'Failed inputRecipe' })
         }
     },
+    
 
     updateRecipe: async (req, res, next) => {
         try {

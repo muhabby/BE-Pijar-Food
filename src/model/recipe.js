@@ -65,11 +65,11 @@ const searchRecipeCountModel = async (data) => {
 
 const inputRecipeModel = async (data) => {
     console.log("model - getRecipeById")
-    let { id, title, ingredient, photo } = data
+    let { id, title, ingredient, photo, category_id, user_id } = data
     console.log(data)
     return new Promise((resolve, reject) =>
-        Pool.query(`INSERT INTO recipe (id, title, ingredient, photo, created_at) VALUES (
-            '${id}', '${title}', '${ingredient}', '${photo}', NOW());`, (err, res) => {
+        Pool.query(`INSERT INTO recipe (id, title, ingredient, photo, created_at, category_id, user_id) VALUES (
+            '${id}', '${title}', '${ingredient}', '${photo}', NOW(), '${category_id}', '${user_id}');`, (err, res) => {
             if (!err) {
                 return resolve(res)
             }
@@ -113,4 +113,34 @@ const deleteRecipeModel = async (id) => {
     )
 }
 
-module.exports = { getRecipeModel, getRecipeByIdModel, searchRecipeDetailModel, searchRecipeCountModel, inputRecipeModel, updateRecipeModel, deleteRecipeModel }
+const getCategoryByIdModel = async (id) => {
+    console.log("model - getCategoryById")
+    return new Promise((resolve, reject) =>
+        Pool.query(`SELECT * FROM category WHERE id = '${id}'`, (err, res) => {
+            if (!err) {
+                return resolve(res)
+            }
+            else {
+                console.log('error db -', err)
+                reject(err)
+            }
+        })
+    )
+}
+
+const getUsersByIdModel = async (id) => {
+    console.log("model - getUsersById")
+    return new Promise((resolve, reject) =>
+        Pool.query(`SELECT * FROM users WHERE id = '${id}'`, (err, res) => {
+            if (!err) {
+                return resolve(res)
+            }
+            else {
+                console.log('error db -', err)
+                reject(err)
+            }
+        })
+    )
+}
+
+module.exports = { getRecipeModel, getRecipeByIdModel, searchRecipeDetailModel, searchRecipeCountModel, inputRecipeModel, updateRecipeModel, deleteRecipeModel, getCategoryByIdModel, getUsersByIdModel }
