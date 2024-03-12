@@ -130,3 +130,18 @@ VALUES (
     );
 
 SELECT * FROM category;
+
+-- ===========================================
+-- AUTH
+-- ===========================================
+SELECT * FROM users WHERE email = 'abcd1234@gmail.com';
+
+INSERT INTO
+    users (
+        id, full_name, email, password, bio, created_at
+    )
+VALUES (
+        '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'Muhabby Mulya', 'muhabby@gmail.com', 'asdf1234', 'Food Lover', NOW()
+    );
+
+DELETE FROM users WHERE email = 'test@gmail.com';
