@@ -195,7 +195,7 @@ const RecipeController = {
             if (req.payload.id !== newRecipe.user_id) {
                 console.log(`id_token = ${req.payload.id}`)
                 console.log(`id_user = ${newRecipe.user_id}`)
-                return res.status(404).json({code: 404, message: 'Recipe is not yours'})
+                return res.status(404).json({code: 404, message: 'This is not your recipe'})
             }
 
             // Process
@@ -240,7 +240,7 @@ const RecipeController = {
             if (req.payload.id !== newRecipe.user_id) {
                 console.log(`id_token = ${req.payload.id}`)
                 console.log(`id_user = ${newRecipe.user_id}`)
-                return res.status(404).json({code: 404, message: 'Recipe is not yours'})
+                return res.status(404).json({code: 404, message: 'This is not your recipe'})
             }
 
             // Process

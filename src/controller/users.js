@@ -1,30 +1,31 @@
 const { v4: uuidv4 } = require('uuid')
 const {
-    getUsersModel,
-    getUsersByIdModel,
+    showUsersModel,
+    showUsersByIdModel,
     searchUsersDetailModel,
     searchUsersCountModel,
     inputUsersModel,
     updateUsersModel,
     deleteUsersModel
 } = require('../model/users')
+const argon2 = require('argon2')
 
 const usersController = {
-    getUsers: async (req, res, next) => {
+    showUsers: async (req, res, next) => {
         try {
             // Process
-            let users = await getUsersModel()
+            let users = await showUsersModel()
             let result = users.rows
-            return res.status(200).json({ message: 'Success getUsers', data: result })
+            return res.status(200).json({ message: 'Success showUsers', data: result })
         }
         catch (err) {
-            console.log('getUsers error')
+            console.log('showUsers error')
             console.log(err)
-            return res.status(404).json({ message: 'Failed getUsers' })
+            return res.status(404).json({ message: 'Failed showUsers' })
         }
     },
 
-    getUsersById: async (req, res, next) => {
+    showUsersById: async (req, res, next) => {
         try {
             // Check params
             let { id } = req.params
@@ -33,17 +34,17 @@ const usersController = {
             }
 
             // Process
-            let users = await getUsersByIdModel(id)
+            let users = await showUsersByIdModel(id)
             let result = users.rows
             if (!result.length) {
                 return res.status(404).json({ message: 'Users not found or id invalid' })
             }
-            return res.status(200).json({ message: 'Success getUsersById', data: result[0] })
+            return res.status(200).json({ message: 'Success showUsersById', data: result[0] })
         }
         catch (err) {
-            console.log('getUsersById error')
+            console.log('showUsersById error')
             console.log(err)
-            return res.status(404).json({ message: 'Failed getUsersByIdcipe' })
+            return res.status(404).json({ message: 'Failed showUsersByIdcipe' })
         }
     },
 
@@ -119,19 +120,25 @@ const usersController = {
                 totalData: total
             }
 
-            return res.status(200).json({ message: 'Success getUsersDetail', data: result, pagination })
+            return res.status(200).json({ message: 'Success searchUsersDetail', data: result, pagination })
         }
         catch (err) {
-            console.log('getUsers error')
+            console.log('searchUsers error')
             console.log(err)
-            return res.status(404).json({ message: 'Failed getUsersDetail' })
+            return res.status(404).json({ message: 'Failed searchUsersDetail' })
         }
     },
 
     inputUsers: async (req, res, next) => {
         try {
-            // Check body
+            // Check token
+            if(!req.payload){
+                return res.status(404).json({code: 404, message: "Server need token, please login"})
+            }
+            
             let { full_name, email, password, profile_picture, bio } = req.body
+
+            // Check body
             if (!full_name || full_name === "" || !email || email === "" || !password || password === "" || !profile_picture || profile_picture === "" || !bio || bio === "") {
                 return res.json({ code: 404, message: "Input invalid" });
             }
@@ -153,22 +160,37 @@ const usersController = {
 
     updateUsers: async (req, res, next) => {
         try {
-            // Check params and body
             let { id } = req.params
+            // Check token
+            if(!req.payload){
+                return res.status(404).json({code: 404, message: "Server need token, please login"})
+            }
+
+            // Check params and body
             if (id === '') {
                 return res.status(404).json({ message: 'Params id invalid' })
             }
+
             let { full_name, email, password, profile_picture, bio } = req.body
 
             // Check Users
-            let users = await getUsersByIdModel(id)
+            let users = await showUsersByIdModel(id)
             let resultUsers = users.rows
             if (!resultUsers.length) {
                 return res.status(404).json({ message: 'Users not found or id invalid' })
             }
 
-            // Process
             let newUsers = resultUsers[0]
+            
+            // Check if id users and id token same or not
+            if (req.payload.id !== newUsers.id) {
+                console.log(`id_token = ${req.payload.id}`)
+                console.log(`id_user = ${newUsers.id}`)
+                return res.status(404).json({code: 404, message: 'This is not your account'})
+            }
+
+            // Process
+            password = await argon2.hash(password)
             let data = {
                 id,
                 full_name: full_name || newUsers.full_name,
@@ -192,17 +214,32 @@ const usersController = {
 
     deleteUsers: async (req, res, next) => {
         try {
-            // Check params
             let { id } = req.params
+
+            // Check token
+            if(!req.payload){
+                return res.status(404).json({code: 404, message: "Server need token, please login"})
+            }
+
+            // Check params
             if (id === '') {
                 return res.status(404).json({ message: 'Params id invalid' })
             }
 
             // Check Users
-            let users = await getUsersByIdModel(id)
+            let users = await showUsersByIdModel(id)
             let resultUsers = users.rows
             if (!resultUsers.length) {
                 return res.status(404).json({ message: 'Users not found or id invalid' })
+            }
+
+            let newUsers = resultUsers[0]
+            
+            // Check if id users and id token same or not
+            if (req.payload.id !== newUsers.id) {
+                console.log(`id_token = ${req.payload.id}`)
+                console.log(`id_user = ${newUsers.id}`)
+                return res.status(404).json({code: 404, message: 'This is not your account'})
             }
 
             // Process

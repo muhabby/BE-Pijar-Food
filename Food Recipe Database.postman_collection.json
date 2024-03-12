@@ -1,0 +1,1114 @@
+{
+	"info": {
+		"_postman_id": "4d84b688-5b0c-40b9-b55f-982f957fe649",
+		"name": "Food Recipe Database",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33167825"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Auth Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "full_name",
+									"value": "Muhabby Mulya",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "muhabby@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "muh123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "muhabby@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "muh123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Show Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response content type is application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"var template = `\r",
+									"<style type=\"text/css\">\r",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+									"    .tftable tr {background-color:#ffffff;}\r",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+									"    .tftable tr:hover {background-color:#e0ffff;}\r",
+									"</style>\r",
+									"\r",
+									"<table class=\"tftable\" border=\"1\">\r",
+									"    <tr>\r",
+									"        <th>User ID</th>\r",
+									"        <th>Full Name</th>\r",
+									"        <th>Email</th>\r",
+									"        <th>Password</th>\r",
+									"        <th>Profile Picture</th>\r",
+									"        <th>About Me</th>\r",
+									"        <th>Registration Date</th>\r",
+									"        <th>Updated Date</th>\r",
+									"    </tr>\r",
+									"\r",
+									"    {{#each response.data}}\r",
+									"        <tr>\r",
+									"            <td>{{user_id}}</td>\r",
+									"            <td>{{full_name}}</td>\r",
+									"            <td>{{email}}</td>\r",
+									"            <td>{{password}}</td>\r",
+									"            <td>{{profile_picture}}</td>\r",
+									"            <td>{{about_me}}</td>\r",
+									"            <td>{{regist_date}}</td>\r",
+									"            <td>{{updated_date}}</td>\r",
+									"        </tr>\r",
+									"    {{/each}}\r",
+									"</table>\r",
+									"`;\r",
+									"\r",
+									"function constructVisualizerPayload() {\r",
+									"    return {response: pm.response.json()};\r",
+									"}\r",
+									"\r",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Users By Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response content type is application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"var template = `\r",
+									"<style type=\"text/css\">\r",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+									"    .tftable tr {background-color:#ffffff;}\r",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+									"    .tftable tr:hover {background-color:#e0ffff;}\r",
+									"</style>\r",
+									"\r",
+									"<table class=\"tftable\" border=\"1\">\r",
+									"    <tr>\r",
+									"        <th>User ID</th>\r",
+									"        <th>Full Name</th>\r",
+									"        <th>Email</th>\r",
+									"        <th>Password</th>\r",
+									"        <th>Profile Picture</th>\r",
+									"        <th>About Me</th>\r",
+									"        <th>Registration Date</th>\r",
+									"        <th>Updated Date</th>\r",
+									"    </tr>\r",
+									"    <tr>\r",
+									"        <td>{{response.user_id}}</td>\r",
+									"        <td>{{response.full_name}}</td>\r",
+									"        <td>{{response.email}}</td>\r",
+									"        <td>{{response.password}}</td>\r",
+									"        <td>{{response.profile_picture}}</td>\r",
+									"        <td>{{response.about_me}}</td>\r",
+									"        <td>{{response.regist_date}}</td>\r",
+									"        <td>{{response.updated_date}}</td>\r",
+									"    </tr>\r",
+									"</table>\r",
+									"`;\r",
+									"\r",
+									"function constructVisualizerPayload() {\r",
+									"    return {response: pm.response.json().data};\r",
+									"}\r",
+									"\r",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/2f658b6c-76b4-48cf-aeaf-8ab0a3561fa4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"2f658b6c-76b4-48cf-aeaf-8ab0a3561fa4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `",
+									"<style type=\"text/css\">",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+									"    .tftable tr {background-color:#ffffff;}",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+									"    .tftable tr:hover {background-color:#e0ffff;}",
+									"</style>",
+									"",
+									"<table class=\"tftable\" border=\"1\">",
+									"    <tr>",
+									"        <th>ID</th>",
+									"        <th>Full Name</th>",
+									"        <th>Email</th>",
+									"        <th>Password</th>",
+									"        <th>Profile Picture</th>",
+									"        <th>About Me</th>",
+									"        <th>Registration Date</th>",
+									"        <th>Updated Date</th>",
+									"    </tr>",
+									"    ",
+									"    {{#each response.data}}",
+									"        <tr>",
+									"            <td>{{user_id}}</td>",
+									"            <td>{{full_name}}</td>",
+									"            <td>{{email}}</td>",
+									"            <td>{{password}}</td>",
+									"            <td>{{profile_picture}}</td>",
+									"            <td>{{about_me}}</td>",
+									"            <td>{{regist_date}}</td>",
+									"            <td>{{updated_date}}</td>",
+									"        </tr>",
+									"    {{/each}}",
+									"</table>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    return {response: pm.response.json()}",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/detail?search=&searchBy=full_name&sortBy=regist_date&sort=ASC&limit=5&page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"detail"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": ""
+								},
+								{
+									"key": "searchBy",
+									"value": "full_name",
+									"description": "full_name"
+								},
+								{
+									"key": "sortBy",
+									"value": "regist_date",
+									"description": "regist_date"
+								},
+								{
+									"key": "sort",
+									"value": "ASC",
+									"description": "ASC | DESC"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmNjU4YjZjLTc2YjQtNDhjZi1hZWFmLThhYjBhMzU2MWZhNCIsImZ1bGxfbmFtZSI6IkJ1ZGkgSCIsImVtYWlsIjoiYnVkaUBnbWFpbC5jb20iLCJwcm9maWxlX3BpY3R1cmUiOm51bGwsImJpbyI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjQtMDMtMTJUMjA6NDM6MzQuMTUxWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTcxMDI3MjYzNX0.4z3mlfPaoKTXsvkBwfrI16I9KP8mi65wBOqxON_Dbvk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/d52c3a31-fecf-491e-bcf4-112b30d8d59e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"d52c3a31-fecf-491e-bcf4-112b30d8d59e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmNjU4YjZjLTc2YjQtNDhjZi1hZWFmLThhYjBhMzU2MWZhNCIsImZ1bGxfbmFtZSI6IkJ1ZGkgSCIsImVtYWlsIjoiYnVkaUBnbWFpbC5jb20iLCJwcm9maWxlX3BpY3R1cmUiOm51bGwsImJpbyI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjQtMDMtMTJUMjA6NDM6MzQuMTUxWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTcxMDI3MjYzNX0.4z3mlfPaoKTXsvkBwfrI16I9KP8mi65wBOqxON_Dbvk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "full_name",
+									"value": "",
+									"description": "Fill in a new one or leave it blank",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"description": "Fill in a new one or leave it blank",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"description": "Fill in a new one or leave it blank",
+									"type": "text"
+								},
+								{
+									"key": "profile_picture",
+									"value": "Belum ada foto",
+									"description": "Fill in a new one or leave it blank",
+									"type": "text"
+								},
+								{
+									"key": "bio",
+									"value": "Food Hunter",
+									"description": "Fill in a new one or leave it blank",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/2f658b6c-76b4-48cf-aeaf-8ab0a3561fa4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"2f658b6c-76b4-48cf-aeaf-8ab0a3561fa4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Recipe",
+			"item": [
+				{
+					"name": "Show Recipe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response content type is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"var template = `",
+									"<style type=\"text/css\">",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+									"    .tftable tr {background-color:#ffffff;}",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+									"    .tftable tr:hover {background-color:#e0ffff;}",
+									"</style>",
+									"",
+									"<table class=\"tftable\" border=\"1\">",
+									"    <tr>",
+									"        <th>ID</th>",
+									"        <th>Title</th>",
+									"        <th>Ingredient</th>",
+									"        <th>Photo</th>",
+									"        <th>Created At</th>",
+									"        <th>Updated At</th>",
+									"        <th>Category ID</th>",
+									"        <th>User ID</th>",
+									"    </tr>",
+									"    ",
+									"    {{#each response.data}}",
+									"        <tr>",
+									"            <td>{{id}}</td>",
+									"            <td>{{title}}</td>",
+									"            <td>{{ingredient}}</td>",
+									"            <td>{{photo}}</td>",
+									"            <td>{{created_at}}</td>",
+									"            <td>{{updated_at}}</td>",
+									"            <td>{{category_id}}</td>",
+									"            <td>{{user_id}}</td>",
+									"        </tr>",
+									"    {{/each}}",
+									"</table>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    return { response: pm.response.json() }",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/recipe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"recipe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Recipe By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/recipe/ec2727a5-1f0c-48a5-b14e-d6e4fef1ee57",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"recipe",
+								"ec2727a5-1f0c-48a5-b14e-d6e4fef1ee57"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Recipe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `",
+									"<style type=\"text/css\">",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+									"    .tftable tr {background-color:#ffffff;}",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+									"    .tftable tr:hover {background-color:#e0ffff;}",
+									"</style>",
+									"",
+									"<table class=\"tftable\" border=\"1\">",
+									"    <tr>",
+									"        <th>ID</th>",
+									"        <th>Title</th>",
+									"        <th>Ingredient</th>",
+									"        <th>Photo</th>",
+									"        <th>Created At</th>",
+									"        <th>Updated At</th>",
+									"    </tr>",
+									"    ",
+									"    {{#each response.data}}",
+									"        <tr>",
+									"            <td>{{id}}</td>",
+									"            <td>{{title}}</td>",
+									"            <td>{{ingredient}}</td>",
+									"            <td>{{photo}}</td>",
+									"            <td>{{created_at}}</td>",
+									"            <td>{{updated_at}}</td>",
+									"        </tr>",
+									"    {{/each}}",
+									"</table>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    return {response: pm.response.json()}",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/recipe/detail?search=&searchBy=title&sortBy=title&sort=ASC&limit=2&page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"recipe",
+								"detail"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": ""
+								},
+								{
+									"key": "searchBy",
+									"value": "title",
+									"description": "title | ingredient"
+								},
+								{
+									"key": "sortBy",
+									"value": "title",
+									"description": "title | created_at | updated_at"
+								},
+								{
+									"key": "sort",
+									"value": "ASC",
+									"description": "ASC | DESC"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Recipe",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJmNjU4YjZjLTc2YjQtNDhjZi1hZWFmLThhYjBhMzU2MWZhNCIsImZ1bGxfbmFtZSI6IkJ1ZGkgSCIsImVtYWlsIjoiYnVkaUBnbWFpbC5jb20iLCJwcm9maWxlX3BpY3R1cmUiOm51bGwsImJpbyI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjQtMDMtMTJUMjA6NDM6MzQuMTUxWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTcxMDI3MjYzNX0.4z3mlfPaoKTXsvkBwfrI16I9KP8mi65wBOqxON_Dbvk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/recipe/f359c475-ea73-4e00-81d8-4dfe1c4c6da6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"recipe",
+								"f359c475-ea73-4e00-81d8-4dfe1c4c6da6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Recipe",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ1MmMzYTMxLWZlY2YtNDkxZS1iY2Y0LTExMmIzMGQ4ZDU5ZSIsImZ1bGxfbmFtZSI6Ik11aGFiYnkgTXVseWEiLCJlbWFpbCI6Im11aGFiYnlAZ21haWwuY29tIiwicHJvZmlsZV9waWN0dXJlIjpudWxsLCJiaW8iOm51bGwsImNyZWF0ZWRfYXQiOiIyMDI0LTAzLTEyVDIwOjQyOjU2LjM5N1oiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE3MTAyNzMwMjh9.fHYA0NNxWRQEzmQZrIfWDEqszCtvJkNGzxiWr8l2ryk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Nasi Goreng",
+									"type": "text"
+								},
+								{
+									"key": "ingredient",
+									"value": "Nasi, kecap",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "2",
+									"description": "1 : Desert | 2 : Main Course | 3 : Appetizer",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/recipe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"recipe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Recipe",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ1MmMzYTMxLWZlY2YtNDkxZS1iY2Y0LTExMmIzMGQ4ZDU5ZSIsImZ1bGxfbmFtZSI6Ik11aGFiYnkgTXVseWEiLCJlbWFpbCI6Im11aGFiYnlAZ21haWwuY29tIiwicHJvZmlsZV9waWN0dXJlIjpudWxsLCJiaW8iOm51bGwsImNyZWF0ZWRfYXQiOiIyMDI0LTAzLTEyVDIwOjQyOjU2LjM5N1oiLCJ1cGRhdGVkX2F0IjpudWxsLCJpYXQiOjE3MTAyNzMwMjh9.fHYA0NNxWRQEzmQZrIfWDEqszCtvJkNGzxiWr8l2ryk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Nasi Goreng Spesial",
+									"type": "text"
+								},
+								{
+									"key": "ingredient",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "nasigoreng.jpg",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "",
+									"description": "1 : Desert | 2 : Main Course | 3 : Appetizer",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/recipe/f359c475-ea73-4e00-81d8-4dfe1c4c6da6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"recipe",
+								"f359c475-ea73-4e00-81d8-4dfe1c4c6da6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Show Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `\r",
+									"<style type=\"text/css\">\r",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+									"    .tftable tr {background-color:#ffffff;}\r",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+									"    .tftable tr:hover {background-color:#e0ffff;}\r",
+									"</style>\r",
+									"\r",
+									"<table class=\"tftable\" border=\"1\">\r",
+									"    <tr>\r",
+									"        <th>ID</th>\r",
+									"        <th>Name</th>\r",
+									"        <th>Description</th>\r",
+									"        <th>Picture</th>\r",
+									"        <th>Created At</th>\r",
+									"        <th>Updated At</th>\r",
+									"    </tr>\r",
+									"    \r",
+									"    {{#each response.data}}\r",
+									"        <tr>\r",
+									"            <td>{{id}}</td>\r",
+									"            <td>{{name}}</td>\r",
+									"            <td>{{description}}</td>\r",
+									"            <td>{{picture}}</td>\r",
+									"            <td>{{created_at}}</td>\r",
+									"            <td>{{updated_at}}</td>\r",
+									"        </tr>\r",
+									"    {{/each}}\r",
+									"</table>\r",
+									"`;\r",
+									"\r",
+									"function constructVisualizerPayload() {\r",
+									"  return { response: pm.response.json() }\r",
+									"}\r",
+									"\r",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Category By Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `\r",
+									"<style type=\"text/css\">\r",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+									"    .tftable tr {background-color:#ffffff;}\r",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+									"    .tftable tr:hover {background-color:#e0ffff;}\r",
+									"</style>\r",
+									"\r",
+									"<table class=\"tftable\" border=\"1\">\r",
+									"    <tr>\r",
+									"        <th>ID</th>\r",
+									"        <th>Name</th>\r",
+									"        <th>Description</th>\r",
+									"        <th>Picture</th>\r",
+									"        <th>Created At</th>\r",
+									"        <th>Updated At</th>\r",
+									"    </tr>\r",
+									"    <tr>\r",
+									"        <td>{{response.data.id}}</td>\r",
+									"        <td>{{response.data.name}}</td>\r",
+									"        <td>{{response.data.description}}</td>\r",
+									"        <td>{{response.data.picture}}</td>\r",
+									"        <td>{{response.data.created_at}}</td>\r",
+									"        <td>{{response.data.updated_at}}</td>\r",
+									"    </tr>\r",
+									"</table>\r",
+									"`;\r",
+									"\r",
+									"function constructVisualizerPayload() {\r",
+									"    return {response: pm.response.json()}\r",
+									"}\r",
+									"\r",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category/589d02de-4c57-4e3e-9cae-7d816040db0a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"589d02de-4c57-4e3e-9cae-7d816040db0a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `",
+									"<style type=\"text/css\">",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+									"    .tftable tr {background-color:#ffffff;}",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+									"    .tftable tr:hover {background-color:#e0ffff;}",
+									"</style>",
+									"",
+									"<table class=\"tftable\" border=\"1\">",
+									"    <tr>",
+									"        <th>ID</th>",
+									"        <th>Title</th>",
+									"        <th>Ingredient</th>",
+									"        <th>Photo</th>",
+									"        <th>Created At</th>",
+									"        <th>Updated At</th>",
+									"    </tr>",
+									"    ",
+									"    {{#each response.data}}",
+									"        <tr>",
+									"            <td>{{id}}</td>",
+									"            <td>{{name}}</td>",
+									"            <td>{{description}}</td>",
+									"            <td>{{picture}}</td>",
+									"            <td>{{created_at}}</td>",
+									"            <td>{{updated_at}}</td>",
+									"        </tr>",
+									"    {{/each}}",
+									"</table>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    return {response: pm.response.json()}",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category/detail?search=des&searchBy=name&sortBy=created_at&sort=ASC&limit=1&page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"detail"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "des"
+								},
+								{
+									"key": "searchBy",
+									"value": "name",
+									"description": "name"
+								},
+								{
+									"key": "sortBy",
+									"value": "created_at",
+									"description": "created_at | updated_at"
+								},
+								{
+									"key": "sort",
+									"value": "ASC",
+									"description": "ASC | DESC"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category/589d02de-4c57-4e3e-9cae-7d816040db0a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"589d02de-4c57-4e3e-9cae-7d816040db0a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Appetizer ",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Makanan pembuka yang disajikan dalam porsi kecil. Biasanya, berupa makanan kecil yang dihidangkan sebelum makanan utama atau dikonsumsi di antara waktu makan.",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"value": "https://placehold.co/600x400",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Main Course",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Hidangan pokok atau makanan inti dengan susunan menu yang dihidangkan saat makan siang maupun malam dalam porsi yang lebih besar daripada hidangan pembuka.",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"value": "https://placehold.co/600x400",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/category/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

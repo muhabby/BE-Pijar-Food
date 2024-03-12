@@ -7,7 +7,7 @@ module.exports = {
         "eslint:recommended",
         // "plugin:react/recommended",
         "plugin:react/jsx-runtime",
-        "stylelint-config-standard"
+        // "stylelint-config-standard"
     ],
     "overrides": [
         {

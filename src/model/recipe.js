@@ -2,7 +2,7 @@ const Pool = require('../config/db')
 
 
 const showRecipeModel = async () => {
-    console.log("model - showRecipeModel")
+    console.log("model - showRecipe")
     return new Promise((resolve, reject) =>
         Pool.query(`
         SELECT recipe.id, recipe.title, recipe.ingredient, recipe.photo, category.name AS category, users.full_name AS author,
@@ -45,7 +45,7 @@ const showRecipeByIdModel = async (id) => {
 }
 
 const getRecipeByIdModel = async (id) => {
-    console.log("model - getRecipeByIdModel")
+    console.log("model - getRecipeById")
     return new Promise((resolve, reject) =>
         Pool.query(`SELECT * FROM recipe WHERE id = '${id}'`, (err, res) => {
             if (!err) {
@@ -61,7 +61,7 @@ const getRecipeByIdModel = async (id) => {
 
 const searchRecipeDetailModel = async (data) => {
     let { searchBy, search, sortBy, sort, limit, page } = data
-    console.log("model - searchRecipeDetailModel")
+    console.log("model - searchRecipeDetail")
     return new Promise((resolve, reject) =>
         Pool.query(`
         SELECT recipe.id, recipe.title, recipe.ingredient, recipe.photo, category.name AS category, users.full_name AS author,
@@ -84,7 +84,7 @@ const searchRecipeDetailModel = async (data) => {
 
 const searchRecipeCountModel = async (data) => {
     let { searchBy, search } = data
-    console.log("model - searchRecipeCountModel")
+    console.log("model - searchRecipeCount")
     return new Promise((resolve, reject) =>
         Pool.query(`SELECT * FROM recipe WHERE ${searchBy} ILIKE '%${search}%'`, (err, res) => {
             if (!err) {
@@ -99,7 +99,7 @@ const searchRecipeCountModel = async (data) => {
 }
 
 const inputRecipeModel = async (data) => {
-    console.log("model - inputRecipeModel")
+    console.log("model - inputRecipe")
     let { id, title, ingredient, photo, category_id, user_id } = data
     console.log(data)
     return new Promise((resolve, reject) =>
