@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid')
+// const { v4: uuidv4 } = require('uuid')
 const {
     showUsersModel,
     showUsersByIdModel,
@@ -9,6 +9,7 @@ const {
     deleteUsersModel
 } = require('../model/users')
 const argon2 = require('argon2')
+const cloudinary = require('../config/photo')
 
 const usersController = {
     showUsers: async (req, res, next) => {
@@ -161,6 +162,7 @@ const usersController = {
     updateUsers: async (req, res, next) => {
         try {
             let { id } = req.params
+            let { full_name, email, password, profile_picture, bio } = req.body
             // Check token
             if(!req.payload){
                 return res.status(404).json({code: 404, message: "Server need token, please login"})
@@ -170,39 +172,85 @@ const usersController = {
             if (id === '') {
                 return res.status(404).json({ message: 'Params id invalid' })
             }
-
-            let { full_name, email, password, profile_picture, bio } = req.body
-
+            
             // Check Users
             let users = await showUsersByIdModel(id)
             let resultUsers = users.rows
             if (!resultUsers.length) {
                 return res.status(404).json({ message: 'Users not found or id invalid' })
             }
-
-            let newUsers = resultUsers[0]
             
             // Check if id users and id token same or not
-            if (req.payload.id !== newUsers.id) {
+            let oldUsers = resultUsers[0]
+            if (req.payload.id !== oldUsers.id) {
                 console.log(`id_token = ${req.payload.id}`)
-                console.log(`id_user = ${newUsers.id}`)
+                console.log(`id_user = ${oldUsers.id}`)
                 return res.status(404).json({code: 404, message: 'This is not your account'})
             }
 
             // Process
-            password = await argon2.hash(password)
             let data = {
                 id,
-                full_name: full_name || newUsers.full_name,
-                email: email || newUsers.email,
-                password: password || newUsers.password,
-                profile_picture: profile_picture || newUsers.profile_picture,
-                bio: bio || newUsers.bio,
+                full_name: full_name || oldUsers.full_name,
+                email: email || oldUsers.email,
+                password: password || oldUsers.password,
+                bio: bio || oldUsers.bio,
             }
-            let result = await updateUsersModel(data)
-            if (result.rowCount === 1) {
-                return res.status(200).json({ code: 200, message: "Success update data" })
+
+            if (password !== '' ) {
+                data.password = await argon2.hash(password);
             }
+
+            // Check & update with photo
+            console.log('photo')
+            console.log(req.file)
+            
+            // Update with photo
+            if (req.isFileValid === true) {
+                
+                // Check photo size
+                console.log('photo_size : ' + req.file.size)
+                if (req.file.size >= 5242880) {
+                    return res.json({code: 404, message: "Photo is too large (max. 5 mb)"})
+                }
+                
+                // Upload photo
+                const imageUpload = await cloudinary.uploader.upload(req.file.path,{
+                    folder: 'recipe-assets'
+                })
+                
+                // Check if photo not uploaded to cloudinary
+                console.log('cloudinary')
+                console.log(imageUpload)
+                if (!imageUpload) {
+                    return res.json({code: 404, message: "Upload photo failed"})
+                }
+                
+                // Process
+                data.profile_picture = imageUpload.secure_url
+                let result = await updateUsersModel(data);
+                if (result.rowCount === 1) {
+                    return res.status(200).json({code: 200, message: "Success update data" })
+                }
+            }
+            else if (req.isFileValid === false) {
+                // Check format photo
+                console.log('isFileValid : '+ req.isFileValid)
+                if (!req.isFileValid) {
+                    return res.json({code: 404, message: req.isFileValidMessage})
+                }
+            }
+            
+            // Update without photo
+            else if (req.isFileValid === undefined) {
+                // Process
+                data.profile_picture = oldUsers.profile_picture
+                let result = await updateUsersModel(data);
+                if (result.rowCount === 1) {
+                    return res.status(200).json({ code: 200, message: "Success update data" })
+                }
+            }
+
             return res.status(401).json({ code: 401, message: "Failed update data" })
         }
         catch (err) {
@@ -233,12 +281,12 @@ const usersController = {
                 return res.status(404).json({ message: 'Users not found or id invalid' })
             }
 
-            let newUsers = resultUsers[0]
+            let oldUsers = resultUsers[0]
             
             // Check if id users and id token same or not
-            if (req.payload.id !== newUsers.id) {
+            if (req.payload.id !== oldUsers.id) {
                 console.log(`id_token = ${req.payload.id}`)
-                console.log(`id_user = ${newUsers.id}`)
+                console.log(`id_user = ${oldUsers.id}`)
                 return res.status(404).json({code: 404, message: 'This is not your account'})
             }
 

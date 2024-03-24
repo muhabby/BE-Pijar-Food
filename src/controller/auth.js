@@ -11,7 +11,7 @@ const AuthController = {
         let {full_name, email, password} = req.body
         
         //Check column is filled or not
-        if(!full_name || full_name == "" || !email || !password || email == "" || password == ""){
+        if(!full_name || full_name == "" || !email || email == "" || !password || password == ""){
             return res.status(401).json({status:401, messages: "Please fill in all required fields"})
         }
 
@@ -38,20 +38,21 @@ const AuthController = {
         if(!email || !password || email == "" || password == ""){
             return res.status(401).json({status:401, messages: "Please fill in all required fields"})
         }
-
-        let user = await getUsersByEmail(email)
-
+        
         // Check email
+        let user = await getUsersByEmail(email)
         if(user.rowCount === 0){
             return res.status(401).json({status:401, messages: "Email not register"})
         }
 
         let userData = user.rows[0]
-        // console.log(userData)
+        console.log(userData)
         let isVerify = await argon2.verify(userData.password, password)
         
         // Check password
-        if(!isVerify){
+        if (!isVerify) {
+            console.log("argon password :" + userData.password)
+            console.log("users password :" + user.password)
             return res.status(401).json({status:401, messages: "Incorrect password"})
         }
         

@@ -10,6 +10,7 @@ const {
     deleteRecipeModel,
     getCategoryByIdModel
 } = require('../model/recipe')
+const cloudinary = require('../config/photo')
 
 const RecipeController = {
     showRecipe: async (req, res, next) => {
@@ -139,7 +140,7 @@ const RecipeController = {
             if(!req.payload){
                 return res.status(404).json({code: 404, message: "Server need token, please login"})
             }
-            
+
             // Check body
             if (!title || title === "" || !ingredient || ingredient === "" || !category_id || category_id === "") {
                 return res.status(404).json({code: 404, message: "Input invalid" });
@@ -152,8 +153,39 @@ const RecipeController = {
                 return res.status(404).json({code: 404, message: 'Category not found' })
             }
 
+            // Check photo
+            console.log('photo')
+            console.log(req.file)
+
+            // Chech format photo
+            console.log('isFileValid : '+ req.isFileValid)
+            if (req.isFileValid === false) {
+                return res.json({code: 404, message: req.isFileValidMessage})
+            }
+            if (req.isFileValid === undefined) {
+                return res.json({code: 404, message: "Photo required"})
+            }
+            
+            // Check photo size
+            console.log('photo_size : ' + req.file.size)
+            if (req.file.size >= 5242880) {
+                return res.json({code: 404, message: "Photo is too large (max. 5 mb)"})
+            }
+
+            // Upload photo using cloudinary
+            const imageUpload = await cloudinary.uploader.upload(req.file.path,{
+                folder: 'recipe-assets'
+            })
+
+            // Check if photo not uploaded to cloudinary
+            console.log('cloudinary')
+            console.log(imageUpload)
+            if (!imageUpload) {
+                return res.json({code: 404, message: "Upload photo failed"})
+            }
+
             // Process
-            let data = { id: uuidv4(), title, ingredient, photo, category_id, user_id: req.payload.id }
+            let data = { id: uuidv4(), title, ingredient, photo:imageUpload.secure_url, category_id, user_id: req.payload.id }
             let result = await inputRecipeModel(data)
             if (result.rowCount === 1) {
                 return res.status(201).json({ code: 201, message: "Success input data" })
@@ -181,10 +213,9 @@ const RecipeController = {
             if (id === '') {
                 return res.status(404).json({code: 404, message: 'Params id invalid' })
             }
-
-            let recipe = await getRecipeByIdModel(id)
-
+            
             // Check recipe
+            let recipe = await getRecipeByIdModel(id)
             let resultRecipe = recipe.rows
             if (!resultRecipe.length) {
                 return res.status(404).json({code: 404, message: 'Recipe not found or id invalid' })
@@ -203,13 +234,58 @@ const RecipeController = {
                 id,
                 title: title || newRecipe.title,
                 ingredient: ingredient || newRecipe.ingredient,
-                photo: photo || newRecipe.photo,
                 category_id: category_id || newRecipe.category_id
             }
-            let result = await updateRecipeModel(data)
-            if (result.rowCount === 1) {
-                return res.status(200).json({code: 200, message: "Success update data" })
+
+            // Check & update with photo
+            console.log('photo')
+            console.log(req.file)
+
+            // Update with photo
+            if (req.isFileValid === true) {
+
+                // Check photo size
+                console.log('photo_size : ' + req.file.size)
+                if (req.file.size >= 5242880) {
+                    return res.json({code: 404, message: "Photo is too large (max. 5 mb)"})
+                }
+
+                // Upload photo
+                const imageUpload = await cloudinary.uploader.upload(req.file.path,{
+                    folder: 'recipe-assets'
+                })
+                
+                // Check if photo not uploaded to cloudinary
+                console.log('cloudinary')
+                console.log(imageUpload)
+                if (!imageUpload) {
+                    return res.json({code: 404, message: "Upload photo failed"})
+                }
+
+                // Process
+                data.photo = imageUpload.secure_url
+                let result = await updateRecipeModel(data);
+                if (result.rowCount === 1) {
+                    return res.status(200).json({code: 200, message: "Success update data" })
+                }
             }
+            else if (req.isFileValid === false) {
+                // Check format photo
+                console.log('isFileValid : '+ req.isFileValid)
+                if (!req.isFileValid) {
+                    return res.json({code: 404, message: req.isFileValidMessage})
+                }
+            }
+            // Update without photo
+            else if (req.isFileValid === undefined) {
+                // Process
+                data.photo = newRecipe.photo
+                let result = await updateRecipeModel(data);
+                if (result.rowCount === 1) {
+                    return res.status(200).json({ code: 200, message: "Success update data" })
+                }
+            }
+            
             return res.status(401).json({code: 404, message: "Failed update data" })
         }
         catch (err) {
