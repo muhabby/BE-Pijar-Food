@@ -5,10 +5,13 @@ const bodyParser = require('body-parser')
 const Router = require('./src/router')
 const app = express();
 const port = 3000;
+
 const corsOption = {
-    origin: '*',
-    optionSuccesStatus: 200
+	origin: "*",
+	credentials: true,
+	optionSuccessStatus: 200,
 }
+
 app.use(cors(corsOption))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan("combined"))

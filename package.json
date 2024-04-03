@@ -24,7 +24,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint:scripts": "eslint --fix --ext .js --ignore-path .gitignore .",
     "lint:style": "stylelint 'assets/styles/***.scss' --fix",
-    "lint:vue": "stylelint '***.vue' --fix"
+    "lint:vue": "stylelint '***.vue' --fix",
+    "start": "node index.js",
+    "server": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
