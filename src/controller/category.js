@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // const { v4: uuidv4 } = require('uuid')
 const {
     getCategoryModel,

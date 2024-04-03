@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const { v4: uuidv4 } = require('uuid')
 const {
     inputUsers,
@@ -61,7 +62,7 @@ const AuthController = {
         delete userData.password
         let token = GenerateToken(userData)
 
-        res.status(201).json({status:200, messages: "Login success", token})
+        res.status(201).json({status:200, messages: "Login success", token, data: userData})
     }
 }
 

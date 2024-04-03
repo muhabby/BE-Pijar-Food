@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const { v4: uuidv4 } = require('uuid')
 const {
     showRecipeModel,
@@ -18,12 +19,12 @@ const RecipeController = {
             // Process
             let recipe = await showRecipeModel()
             let result = recipe.rows
-            return res.status(200).json({ message: 'Success showRecipe', data: result })
+            return res.status(200).json({ code: 200, message: 'Success showRecipe', data: result })
         }
         catch (err) {
             console.log('showRecipe error')
             console.log(err)
-            return res.status(404).json({ message: 'Failed showRecipe' })
+            return res.status(404).json({ code: 404, message: 'Failed showRecipe' })
         }
     },
 
@@ -36,17 +37,17 @@ const RecipeController = {
             }
 
             // Process
-            let recipe = await showRecipeByIdModel(id)
+            let recipe = await getRecipeByIdModel(id)
             let result = recipe.rows
             if (!result.length) {
                 return res.status(404).json({ code: 404, message: 'Recipe not found or id invalid' })
             }
-            return res.status(200).json({ message: 'Success showRecipeById', data: result[0] })
+            return res.status(200).json({ code: 200, message: 'Success showRecipeById', data: result[0] })
         }
         catch (err) {
             console.log('showRecipeById error')
             console.log(err)
-            return res.status(404).json({ message: 'Failed showRecipeByIdcipe' })
+            return res.status(404).json({ code: 404, message: 'Failed showRecipeByIdcipe' })
         }
     },
 
@@ -123,12 +124,12 @@ const RecipeController = {
                 totalData: total
             }
 
-            return res.status(200).json({ message: 'Success searchRecipeDetail', data: result, pagination })
+            return res.status(200).json({ code: 200, message: 'Success searchRecipeDetail', data: result, pagination })
         }
         catch (err) {
             console.log('searchRecipe error')
             console.log(err)
-            return res.status(404).json({ message: 'Failed searchRecipeDetail' })
+            return res.status(404).json({ code: 404, message: 'Failed searchRecipeDetail' })
         }
     },
 
@@ -142,7 +143,8 @@ const RecipeController = {
             }
 
             // Check body
-            if (!title || title === "" || !ingredient || ingredient === "" || !category_id || category_id === "") {
+            // if (!title || title === "" || title === " " || !ingredient || ingredient === "" || ingredient === " " || !category_id || category_id === "" || category_id === " ") {
+            if (!title.trim() || !ingredient.trim() || !category_id.trim()) {
                 return res.status(404).json({code: 404, message: "Input invalid" });
             }
             
@@ -157,19 +159,19 @@ const RecipeController = {
             console.log('photo')
             console.log(req.file)
 
-            // Chech format photo
+            // Check format photo
             console.log('isFileValid : '+ req.isFileValid)
             if (req.isFileValid === false) {
-                return res.json({code: 404, message: req.isFileValidMessage})
+                return res.status(404).json({code: 404, message: req.isFileValidMessage})
             }
             if (req.isFileValid === undefined) {
-                return res.json({code: 404, message: "Photo required"})
+                return res.status(404).json({code: 404, message: "Photo required"})
             }
             
             // Check photo size
             console.log('photo_size : ' + req.file.size)
             if (req.file.size >= 5242880) {
-                return res.json({code: 404, message: "Photo is too large (max. 5 mb)"})
+                return res.status(404).json({code: 404, message: "Photo is too large (max. 5 mb)"})
             }
 
             // Upload photo using cloudinary
@@ -181,7 +183,7 @@ const RecipeController = {
             console.log('cloudinary')
             console.log(imageUpload)
             if (!imageUpload) {
-                return res.json({code: 404, message: "Upload photo failed"})
+                return res.status(404).json({code: 404, message: "Upload photo failed"})
             }
 
             // Process
@@ -195,7 +197,7 @@ const RecipeController = {
         catch (err) {
             console.log('inputRecipe error')
             console.log(err)
-            return res.status(404).json({ message: 'Failed inputRecipe' })
+            return res.status(404).json({ code: 404, message: 'Failed inputRecipe' })
         }
     },
     
@@ -247,7 +249,7 @@ const RecipeController = {
                 // Check photo size
                 console.log('photo_size : ' + req.file.size)
                 if (req.file.size >= 5242880) {
-                    return res.json({code: 404, message: "Photo is too large (max. 5 mb)"})
+                    return res.status(404).json({code: 404, message: "Photo is too large (max. 5 mb)"})
                 }
 
                 // Upload photo
@@ -259,21 +261,21 @@ const RecipeController = {
                 console.log('cloudinary')
                 console.log(imageUpload)
                 if (!imageUpload) {
-                    return res.json({code: 404, message: "Upload photo failed"})
+                    return res.status(404).json({code: 404, message: "Upload photo failed"})
                 }
 
                 // Process
                 data.photo = imageUpload.secure_url
                 let result = await updateRecipeModel(data);
                 if (result.rowCount === 1) {
-                    return res.status(200).json({code: 200, message: "Success update data" })
+                    return res.status(404).status(200).json({code: 200, message: "Success update data" })
                 }
             }
             else if (req.isFileValid === false) {
                 // Check format photo
                 console.log('isFileValid : '+ req.isFileValid)
                 if (!req.isFileValid) {
-                    return res.json({code: 404, message: req.isFileValidMessage})
+                    return res.status(404).json({code: 404, message: req.isFileValidMessage})
                 }
             }
             // Update without photo
@@ -291,7 +293,7 @@ const RecipeController = {
         catch (err) {
             console.log('putRecipe error')
             console.log(err)
-            return res.status(404).json({ message: 'Failed putRecipe' })
+            return res.status(404).json({ code: 404, message: 'Failed putRecipe' })
         }
     },
 
@@ -329,7 +331,7 @@ const RecipeController = {
         catch (err) {
             console.log('dropRecipe error')
             console.log(err)
-            return res.status(404).json({ message: 'Failed dropRecipe' })
+            return res.status(404).json({ code: 404, message: 'Failed dropRecipe' })
         }
     }
 }

@@ -9,7 +9,8 @@ const showRecipeModel = async () => {
             recipe.created_at, recipe.updated_at
         FROM recipe
             JOIN users ON recipe.user_id = users.id
-            JOIN category ON recipe.category_id = category.id;
+            JOIN category ON recipe.category_id = category.id
+        ORDER BY created_at DESC
         `, (err, res) => {
             if (!err) {
                 return resolve(res)
