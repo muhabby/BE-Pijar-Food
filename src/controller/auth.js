@@ -13,14 +13,14 @@ const AuthController = {
         
         //Check column is filled or not
         if(!full_name || full_name == "" || !email || email == "" || !password || password == ""){
-            return res.status(401).json({status:401, messages: "Please fill in all required fields"})
+            return res.status(401).json({status:401, message: "Please fill in all required fields"})
         }
 
         let user = await getUsersByEmail(email)
 
         // Check email
         if(user.rowCount === 1){
-            return res.status(401).json({status:401, messages: "Email is already registered, please login"})
+            return res.status(401).json({status:401, message: "Email is already registered, please login"})
         }
 
         // Process
@@ -29,7 +29,7 @@ const AuthController = {
         let result = await inputUsers(data)
         console.log("Result")
         console.log(result)
-        res.status(201).json({status:200, messages: "Register success, please login"})
+        res.status(201).json({status:200, message: "Register success, please login"})
     },
 
     login: async (req, res, next) => {
@@ -37,13 +37,13 @@ const AuthController = {
         
         //Check column is filled or not
         if(!email || !password || email == "" || password == ""){
-            return res.status(401).json({status:401, messages: "Please fill in all required fields"})
+            return res.status(401).json({status:401, message: "Please fill in all required fields"})
         }
         
         // Check email
         let user = await getUsersByEmail(email)
         if(user.rowCount === 0){
-            return res.status(401).json({status:401, messages: "Email not register"})
+            return res.status(401).json({status:401, message: "Email not register"})
         }
 
         let userData = user.rows[0]
@@ -54,7 +54,7 @@ const AuthController = {
         if (!isVerify) {
             console.log("argon password :" + userData.password)
             console.log("users password :" + user.password)
-            return res.status(401).json({status:401, messages: "Incorrect password"})
+            return res.status(401).json({status:401, message: "Incorrect password"})
         }
         
         console.log(userData)
@@ -62,7 +62,7 @@ const AuthController = {
         delete userData.password
         let token = GenerateToken(userData)
 
-        res.status(201).json({status:200, messages: "Login success", token, data: userData})
+        res.status(201).json({status:200, message: "Login success", token, data: userData})
     }
 }
 

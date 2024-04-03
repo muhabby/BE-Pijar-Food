@@ -1,4 +1,5 @@
-// const { v4: uuidv4 } = require('uuid')
+/* eslint-disable no-unused-vars */
+const { v4: uuidv4 } = require('uuid')
 const {
     showUsersModel,
     showUsersByIdModel,
@@ -216,7 +217,7 @@ const usersController = {
                 
                 // Upload photo
                 const imageUpload = await cloudinary.uploader.upload(req.file.path,{
-                    folder: 'recipe-assets'
+                    folder: 'users-assets'
                 })
                 
                 // Check if photo not uploaded to cloudinary
