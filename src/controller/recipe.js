@@ -37,7 +37,7 @@ const RecipeController = {
             }
 
             // Process
-            let recipe = await getRecipeByIdModel(id)
+            let recipe = await showRecipeByIdModel(id)
             let result = recipe.rows
             if (!result.length) {
                 return res.status(404).json({ code: 404, message: 'Recipe not found or id invalid' })
@@ -268,7 +268,7 @@ const RecipeController = {
                 data.photo = imageUpload.secure_url
                 let result = await updateRecipeModel(data);
                 if (result.rowCount === 1) {
-                    return res.status(404).status(200).json({code: 200, message: "Success update data" })
+                    return res.status(200).json({code: 200, message: "Success update data" })
                 }
             }
             else if (req.isFileValid === false) {
