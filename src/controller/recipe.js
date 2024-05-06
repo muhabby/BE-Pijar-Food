@@ -9,7 +9,8 @@ const {
     inputRecipeModel,
     updateRecipeModel,
     deleteRecipeModel,
-    getCategoryByIdModel
+    getCategoryByIdModel,
+    showRecipeByUserIdModel
 } = require('../model/recipe')
 const cloudinary = require('../config/photo')
 
@@ -48,6 +49,29 @@ const RecipeController = {
             console.log('showRecipeById error')
             console.log(err)
             return res.status(404).json({ code: 404, message: 'Failed showRecipeByIdcipe' })
+        }
+    },
+
+    showRecipeByUserId: async (req, res, next) => {
+        try {
+            // Check params
+            let { id } = req.params
+            if (id === '') {
+                return res.status(404).json({ code: 404, message: 'Params id invalid' })
+            }
+
+            // Process
+            let recipe = await showRecipeByUserIdModel(id)
+            let result = recipe.rows
+            if (!result.length) {
+                return res.status(404).json({ code: 404, message: 'User not found or id invalid' })
+            }
+            return res.status(200).json({ code: 200, message: 'Success showRecipeByUserId', data: result })
+        }
+        catch (err) {
+            console.log('showRecipeById error')
+            console.log(err)
+            return res.status(404).json({ code: 404, message: 'Failed showRecipeByUserId' })
         }
     },
 
