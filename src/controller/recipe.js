@@ -214,9 +214,9 @@ const RecipeController = {
             let data = { id: uuidv4(), title, ingredient, photo:imageUpload.secure_url, category_id, user_id: req.payload.id }
             let result = await inputRecipeModel(data)
             if (result.rowCount === 1) {
-                return res.status(201).json({ code: 201, message: "Success input data" })
+                return res.status(200).json({ code: 200, message: "Success input data" })
             }
-            return res.status(401).json({ code: 401, message: "Failed input data" })
+            return res.status(404).json({ code: 404, message: "Failed input data" })
         }
         catch (err) {
             console.log('inputRecipe error')
@@ -229,6 +229,7 @@ const RecipeController = {
     updateRecipe: async (req, res, next) => {
         try {
             let { title, ingredient, photo, category_id } = req.body
+            
             // Check token
             if(!req.payload){
                 return res.status(404).json({code: 404, message: "Server need token, please login"})
@@ -312,7 +313,7 @@ const RecipeController = {
                 }
             }
             
-            return res.status(401).json({code: 404, message: "Failed update data" })
+            return res.status(404).json({code: 404, message: "Failed update data" })
         }
         catch (err) {
             console.log('putRecipe error')

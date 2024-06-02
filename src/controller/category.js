@@ -141,9 +141,9 @@ const categoryController = {
             let data = { name, description, picture }
             let result = await inputCategoryModel(data)
             if (result.rowCount === 1) {
-                return res.status(201).json({ code: 201, message: "Success input data" })
+                return res.status(200).json({ code: 200, message: "Success input data" })
             }
-            return res.status(401).json({ code: 401, message: "Failed input data" })
+            return res.status(404).json({ code: 404, message: "Failed input data" })
         }
         catch (err) {
             console.log('inputCategory error')
@@ -180,7 +180,7 @@ const categoryController = {
             if (result.rowCount === 1) {
                 return res.status(200).json({ code: 200, message: "Success update data" })
             }
-            return res.status(401).json({ code: 401, message: "Failed update data" })
+            return res.status(404).json({ code: 404, message: "Failed update data" })
         }
         catch (err) {
             console.log('putCategory error')
