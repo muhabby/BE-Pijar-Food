@@ -267,10 +267,10 @@ const AuthController = {
       // Check token
       if (!req.payload) {
         return res
-        .status(404)
-        .json({ code: 404, message: "Server need token, please login" });
+          .status(404)
+          .json({ code: 404, message: "Server need token, please login" });
       }
-      
+
       // Check params and body
       let id = req.payload.id;
       if (id === "") {
@@ -325,7 +325,7 @@ const AuthController = {
         password: newPassword || oldUsers.password,
         bio: oldUsers.bio,
         profile_picture: oldUsers.profile_picture,
-    }
+      };
 
       if (newPassword !== "") {
         data.password = await argon2.hash(newPassword);

@@ -16,7 +16,6 @@ const corsOption = {
 };
 
 app.use(cors(corsOption));
-
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(xss());

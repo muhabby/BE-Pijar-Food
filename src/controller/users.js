@@ -183,7 +183,6 @@ const usersController = {
 
   updateUsers: async (req, res, next) => {
     try {
-      let { id } = req.params;
       let { full_name, email, password, profile_picture, bio } = req.body;
 
       // Check token
@@ -194,6 +193,7 @@ const usersController = {
       }
 
       // Check params and body
+      let id = req.payload.id;
       if (id === "") {
         return res.status(404).json({ message: "Params id invalid" });
       }

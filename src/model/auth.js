@@ -55,19 +55,26 @@ const activatedUserModel = async (id) => {
 };
 
 const otpRequestModel = async (data) => {
-  console.log("model - getUsersById")
+  console.log("model - getUsersById");
   let { email, otp_verif } = data;
-    return new Promise((resolve, reject) =>
-        Pool.query(`UPDATE users SET otp_verif='${otp_verif}' WHERE email='${email}'`, (err, res) => {
-            if (!err) {
-                return resolve(res)
-            }
-            else {
-                console.log('error db -', err)
-                reject(err)
-            }
-        })
+  return new Promise((resolve, reject) =>
+    Pool.query(
+      `UPDATE users SET otp_verif='${otp_verif}' WHERE email='${email}'`,
+      (err, res) => {
+        if (!err) {
+          return resolve(res);
+        } else {
+          console.log("error db -", err);
+          reject(err);
+        }
+      }
     )
-}
+  );
+};
 
-module.exports = { getUsersByEmailModel, inputUsersModel, activatedUserModel, otpRequestModel };
+module.exports = {
+  getUsersByEmailModel,
+  inputUsersModel,
+  activatedUserModel,
+  otpRequestModel,
+};
