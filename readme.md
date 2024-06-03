@@ -78,7 +78,7 @@ https://github.com/muhabby/BE-Pijar-Food.git
 npm install
 ```
 
-3. Add .env file at root folder project, and add following
+3. Add .env file at folder project, and add following
 
 ```sh
 DB_HOST= your db host
