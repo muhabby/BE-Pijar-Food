@@ -8,7 +8,9 @@
     <image align="center" width="200" src='https://res.cloudinary.com/dpasid4jl/image/upload/v1717380554/pijar-food-logo/Pijar_Food_Logo_pwadca.png' />
   </a>
 
-  <p align="center" style="margin-top: 10px;">
+  <p></p>
+  
+  <p align="center">
     <a href="https://github.com/habibir7/BE-hirejob/issues">Report Bug</a>
     ·
     <a href="https://github.com/habibir7/BE-hirejob/issues">Request Feature</a>
