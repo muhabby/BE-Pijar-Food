@@ -11,9 +11,9 @@
   <p></p>
   
   <p align="center">
-    <a href="https://github.com/habibir7/BE-hirejob/issues">Report Bug</a>
+    <a href="https://github.com/muhabby/BE-Pijar-Food/issues">Report Bug</a>
     ·
-    <a href="https://github.com/habibir7/BE-hirejob/issues">Request Feature</a>
+    <a href="https://github.com/muhabby/BE-Pijar-Food/issues">Request Feature</a>
   </p>
 </div>
 
