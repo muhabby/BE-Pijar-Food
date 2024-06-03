@@ -13,7 +13,7 @@
   <p align="center">
     <a href="https://github.com/muhabby/BE-Pijar-Food/issues">Report Bug</a>
     ·
-    <a href="https://github.com/muhabby/BE-Pijar-Food/issues">Request Feature</a>
+    <a href="https://github.com/muhabby/BE-Pijar-Food/issues">Feature Request</a>
   </p>
 </div>
 
@@ -84,12 +84,12 @@ npm install
 DB_HOST= your db host
 DB_USER= your db username
 DB_NAME= your db name
-DB_PASSWORD= your password
+DB_PASSWORD= your db password
 DB_PORT= your db port
 JWT_TOKEN= fill in the way you want
 PHOTO_NAME= your cloudinary username
 PHOTO_KEY= your cloudinary api key
-PHOTO_SECRET= your cloduinary api secret
+PHOTO_SECRET= your cloudinary api secret
 EMAIL_NAME= name of the email you want to use for nodemailer
 EMAIL_PASS= password of the email you want to use for nodemailer
 ```
