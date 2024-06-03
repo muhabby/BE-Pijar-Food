@@ -117,5 +117,4 @@ Contributions that make the open source community the best place to learn and cr
 
 ## Contact
 
-- AUTHOR
-  - Muhabby Mulya [@muhabby](https://github.com/muhabby)
+Muhabby Mulya [@muhabby](https://github.com/muhabby)
