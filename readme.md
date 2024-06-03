@@ -1,32 +1,110 @@
-# Deskripsi
+<br />
+<p align="center">
 
-Proyek ini merupakan awal dari pembuatan website pijar food. Saat ini progress yang dibuat pada proyek ini yaitu baru sampai pembuatan backend menggunakan node.js dan postgreSql. Saat ini sistem backend yang sudah dibuat baru sebatas melakukan CRUD pada tabel recipe dan users.
+  <h3 align="center">Pijar Food Rest API</h3>
+  <p align="center">
+    <image align="center" width="200" src='https://res.cloudinary.com/dpasid4jl/image/upload/v1717380554/pijar-food-logo/Pijar_Food_Logo_pwadca.png' />
+  </p>
 
-## Penggunaan
+<!-- TABLE OF CONTENTS -->
 
-1. Penggunaan pada proyek ini saat ini hanya bisa dilakukan melalui postman dengan ketentuan yang sudah dibuat dalam file yang sertakan dalam folder ini
-2. Sebelum melakukan CRUD pada postman, jalankan program npm pada cmd dengan syntax `npm run dev`
+## Table of Contents
 
-## Keterangan
+- [About the Project](#about-the-project)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Related Project](#related-project)
+- [Contact](#contact)
 
-Pada proyek ini menggunakan cukup banyak package manager (npm) seperti diantaranya:
--	npm install -g nodemon		: Install nodemon
--	nodemon				        : Menjalankan nodemon kalau sudah install
--	npm run dev				    : Menyalakan program
--	npm install body-parser		: Install body-parser
--	npm i dotenv				: Install dotenv
--	npm i pg				    : Install pg
--	npm i cors				    : Install cors -> untuk membatasi akses
--	npm i morgan				: Install morgan -> untuk melihat siapa yang akses
--	npm install uuid			: Install uuid -> membuat id random otomatis
--	npm install argon2 			: install argon2 -> untuk melakukan hash pada password
--	npm i jsonwebtoken			: install jwt -> untuk membuat token
+<!-- ABOUT THE PROJECT -->
 
+## About The Project
 
-## Kontak
+Pijar Food Rest API is server api that used in [`Pijar Food Application`](https://pijar-food.vercel.app) . This server manage all function and endpoint in Pijar Food Application such as Create, Read , Update and Delete recipe. This server also facilitates account registration and login to create a profile account.
 
-Jika memiliki pertanyaan atau masalah, silakan hubungi saya Muhabby Mulya di muhabbymulya94@gmail.com.
+### Built With
 
-## Status Proyek
+- [Node JS](https://nodejs.org/en/docs/)
+- [Express JS](https://expressjs.com/)
+- [Nodemailer Package](https://www.npmjs.com/package/nodemailer)
+- [Cloudinary](https://cloudinary.com/)
+- [Morgan Package](https://www.npmjs.com/package/morgan)
+- [DotEnv Package](https://www.npmjs.com/package/dotenv)
+- [JWT Package](https://www.npmjs.com/package/jsonwebtoken)
+- [UUID Package](https://www.npmjs.com/package/uuid)
+- [Multer Package](https://www.npmjs.com/package/multer)
+- [Argon2 Package](https://www.npmjs.com/package/argon2)
+- [Body-parser Package](https://www.npmjs.com/package/body-parser)
+- [Cors Package](https://www.npmjs.com/package/cors)
+- [Helmet Package](https://www.npmjs.com/package/helmet)
+- [Pg Package](https://www.npmjs.com/package/pg)
+- [Xss-clean](https://www.npmjs.com/package/xss-clean)
+- [OTP-gen-agent](https://www.npmjs.com/package/otp-gen-agent)
 
-Proyek ini sedang dalam pengembangan aktif dan diupdate secara teratur.
+<!-- GETTING STARTED -->
+
+## Getting Started
+
+### Prerequisites
+
+This is an example of how to list things you need to use the server and how to install.
+
+- [nodejs](https://nodejs.org/en/download/)
+
+### Installation
+
+1. Clone the repo
+
+```sh
+https://github.com/muhabby/BE-Pijar-Food.git
+```
+
+2. Install NPM packages
+
+```sh
+npm install
+```
+
+3. Add .env file at root folder project, and add following
+
+```sh
+DB_HOST= your db host
+DB_USER= your db username
+DB_NAME= your db name
+DB_PASSWORD= your password
+DB_PORT= your db port
+JWT_TOKEN= fill in the way you want
+PHOTO_NAME= your cloudinary username
+PHOTO_KEY= your cloudinary api key
+PHOTO_SECRET= your cloduinary api secret
+EMAIL_NAME= name of the email you want to use for nodemailer
+EMAIL_PASS= password of the email you want to use for nodemailer
+```
+
+<!-- CONTRIBUTING -->
+
+## Contributing
+
+Contributions that make the open source community the best place to learn and create. Every contribution you make is valuable.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b your/branch`)
+3. Commit your Changes (`git commit -m 'Add some new feature'`)
+4. Push to the Branch (`git push origin feature/yourbranch`)
+5. Open a Pull Request
+
+<!-- RELATED PROJECT -->
+
+## Related Project
+
+- [`Pijar Food Demo`](https://pijar-food.vercel.app)
+- [`Pijar Food Frontend Repository`](https://github.com/muhabby/Pijar-Food)
+
+<!-- CONTACT -->
+
+## Contact
+
+- AUTHOR
+  - Muhabby Mulya [@muhabby](https://github.com/muhabby)
