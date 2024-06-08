@@ -9,6 +9,7 @@ const {
   updateUsersModel,
   deleteUsersModel,
 } = require("../model/users");
+const { getUsersByEmailModel } = require("../model/auth");
 const argon2 = require("argon2");
 const cloudinary = require("../config/photo");
 
@@ -131,56 +132,6 @@ const usersController = {
     }
   },
 
-  inputUsers: async (req, res, next) => {
-    try {
-      // Check token
-      if (!req.payload) {
-        return res
-          .status(404)
-          .json({ code: 404, message: "Server need token, please login" });
-      }
-
-      let { full_name, email, password, profile_picture, bio } = req.body;
-
-      // Check body
-      if (
-        !full_name ||
-        full_name === "" ||
-        !email ||
-        email === "" ||
-        !password ||
-        password === "" ||
-        !profile_picture ||
-        profile_picture === "" ||
-        !bio ||
-        bio === ""
-      ) {
-        return res.json({ code: 404, message: "Input invalid" });
-      }
-
-      // Process
-      let data = {
-        id: uuidv4(),
-        full_name,
-        email,
-        password,
-        profile_picture,
-        bio,
-      };
-      let result = await inputUsersModel(data);
-      if (result.rowCount === 1) {
-        return res
-          .status(200)
-          .json({ code: 200, message: "Success input data" });
-      }
-      return res.status(404).json({ code: 404, message: "Failed input data" });
-    } catch (err) {
-      console.log("inputUsers error");
-      console.log(err);
-      return res.status(404).json({ message: "Failed inputUsers" });
-    }
-  },
-
   updateUsers: async (req, res, next) => {
     try {
       let { full_name, email, password, profile_picture, bio } = req.body;
@@ -228,6 +179,15 @@ const usersController = {
 
       if (password !== "") {
         data.password = await argon2.hash(password);
+      }
+
+      // Check email update
+      let emailUsers = await getUsersByEmailModel(email);
+      if (emailUsers.rowCount === 1) {
+        return res.status(404).json({
+          status: 404,
+          message: "Email is not available",
+        });
       }
 
       // Check & update with photo

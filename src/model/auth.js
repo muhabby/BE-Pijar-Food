@@ -16,14 +16,14 @@ const getUsersByEmailModel = async (email) => {
 
 const inputUsersModel = async (data) => {
   console.log("model - getUsersByEmail");
-  let { id, full_name, email, password, otp_verif } = data;
+  let { id, full_name, email, password, otp_verif, profile_picture } = data;
   return new Promise((resolve, reject) =>
     Pool.query(
       `
         INSERT INTO 
-                users (id, full_name, email, password, created_at, otp_verif, is_verif)
+                users (id, full_name, email, password, created_at, otp_verif, is_verif, profile_picture)
         VALUES
-                ('${id}', '${full_name}', '${email}', '${password}', NOW(), '${otp_verif}', false);
+                ('${id}', '${full_name}', '${email}', '${password}', NOW(), '${otp_verif}', true, '${profile_picture}');
         `,
       (err, res) => {
         if (!err) {

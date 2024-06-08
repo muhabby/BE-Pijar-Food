@@ -48,13 +48,11 @@ const RecipeController = {
           .status(404)
           .json({ code: 404, message: "Recipe not found or id invalid" });
       }
-      return res
-        .status(200)
-        .json({
-          code: 200,
-          message: "Success showRecipeById",
-          data: result[0],
-        });
+      return res.status(200).json({
+        code: 200,
+        message: "Success showRecipeById",
+        data: result[0],
+      });
     } catch (err) {
       console.log("showRecipeById error");
       console.log(err);
@@ -82,13 +80,11 @@ const RecipeController = {
           .status(404)
           .json({ code: 404, message: "User not found or id invalid" });
       }
-      return res
-        .status(200)
-        .json({
-          code: 200,
-          message: "Success showRecipeByUserId",
-          data: result,
-        });
+      return res.status(200).json({
+        code: 200,
+        message: "Success showRecipeByUserId",
+        data: result,
+      });
     } catch (err) {
       console.log("showRecipeById error");
       console.log(err);
@@ -100,89 +96,63 @@ const RecipeController = {
 
   searchRecipe: async (req, res, next) => {
     try {
-      // Check searchBy
-      let searchBy;
-      if (req.query.searchBy === "") {
-        if (
-          req.query.searchBy !== "title" ||
-          req.query.searchBy !== "ingredient"
-        ) {
-          searchBy = req.query.searchBy;
-        } else {
-          searchBy = "title";
-        }
-      } else {
-        searchBy = "title";
-      }
+      const validSearchBy = ["title", "ingredient", "category.name"];
+      const validSortBy = ["created_at", "updated_at"];
+      const validSort = ["ASC", "DESC"];
 
-      // Check sortBy
-      let sortBy;
-      sortBy = req.query.sortBy;
-      // if (req.query.sortBy === "") {
-      //     if (req.query.sortBy !== "created_at" || req.query.sortBy !== "updated_at") {
-      //         sortBy = req.query.sortBy
-      //     }
-      //     else {
-      //         sortBy = "created_at"
-      //     }
-      // }
-      // else {
-      //     sortBy = "created_at"
-      // }
-
-      // Check sort
-      let sort;
-      if (req.query.sort === "") {
-        if (req.query.sort !== "ASC" || req.query.sort !== "DESC") {
-          sort = req.query.sort;
-        } else {
-          sort = "ASC";
-        }
-      } else {
-        sort = "ASC";
-      }
+      const searchBy = validSearchBy.includes(req.query.searchBy)
+        ? req.query.searchBy
+        : "title";
+      const sortBy = validSortBy.includes(req.query.sortBy)
+        ? req.query.sortBy
+        : "created_at";
+      const sort = validSort.includes(req.query.sort) ? req.query.sort : "ASC";
 
       // Check search, limit & page
       let search = req.query.search || "";
       let limit = parseInt(req.query.limit) || 3;
       let page = ((parseInt(req.query.page) || 1) - 1) * parseInt(limit);
 
-      // Process
       let data = { searchBy, search, sortBy, sort, limit, page };
       let recipe = await searchRecipeDetailModel(data);
       let count = await searchRecipeCountModel(data);
       let total = count.rowCount;
       let result = recipe.rows;
 
-      // Pagination
       let pageNext;
-      if (parseInt(req.query.page) >= Math.round(total / parseInt(limit))) {
-        pageNext = 0;
+      if (parseInt(req.query.page) >= Math.ceil(total / parseInt(limit))) {
+        pageNext = null;
       } else {
         pageNext = parseInt(req.query.page) + 1;
       }
+
+      let pagePrev;
+      if (parseInt(req.query.page) - 1 <= 0) {
+        pagePrev = null;
+      } else {
+        pagePrev = parseInt(req.query.page) - 1;
+      }
+
+      // Pagination
       let pagination = {
-        pageTotal: Math.round(total / parseInt(limit)),
-        pagePrev: parseInt(req.query.page) - 1,
+        pageTotal: Math.ceil(total / parseInt(limit)),
+        pagePrev,
         pageNow: parseInt(req.query.page),
         pageNext,
         totalData: total,
       };
 
-      return res
-        .status(200)
-        .json({
-          code: 200,
-          message: "Success searchRecipeDetail",
-          data: result,
-          pagination,
-        });
+      return res.status(200).json({
+        code: 200,
+        message: "Success searchRecipeDetail",
+        data: result,
+        pagination,
+      });
     } catch (err) {
-      console.log("searchRecipe error");
-      console.log(err);
+      console.error("searchRecipe error", err);
       return res
-        .status(404)
-        .json({ code: 404, message: "Failed searchRecipeDetail" });
+        .status(500)
+        .json({ code: 500, message: "Failed searchRecipeDetail" });
     }
   },
 
@@ -198,9 +168,18 @@ const RecipeController = {
       }
 
       // Check body
-      // if (!title || title === "" || title === " " || !ingredient || ingredient === "" || ingredient === " " || !category_id || category_id === "" || category_id === " ") {
-      if (!title.trim() || !ingredient.trim() || !category_id.trim()) {
-        return res.status(404).json({ code: 404, message: "Input invalid" });
+      if (
+        !title ||
+        title === "" ||
+        title === " " ||
+        !ingredient ||
+        ingredient === "" ||
+        ingredient === " " ||
+        !category_id ||
+        category_id === "" ||
+        category_id === " "
+      ) {
+        return res.status(404).json({ code: 404, message: "Input invalid, please fill in all data" });
       }
 
       // Check category id

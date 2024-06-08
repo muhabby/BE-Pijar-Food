@@ -144,9 +144,10 @@ VALUES (
         '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed', 'Muhabby Mulya', 'muhabby@gmail.com', 'asdf1234', 'Food Lover', NOW()
     );
 
-DELETE FROM users WHERE email = 'test@gmail.com';
+
+-- ==========================================
+-- Additional
+-- ==========================================
 
 ALTER TABLE users ADD COLUMN otp_verif VARCHAR;
 ALTER TABLE users ADD COLUMN is_verif BOOLEAN;
-
-SELECT is_verif FROM users WHERE id = '7f5c2fa5-ec48-4b1a-b23e-185b827987be'

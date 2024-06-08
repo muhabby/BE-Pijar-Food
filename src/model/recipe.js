@@ -30,7 +30,7 @@ const showRecipeByIdModel = async (id) => {
     Pool.query(
       `
         SELECT 
-            recipe.id, recipe.title, recipe.ingredient, recipe.photo, recipe.category_id, category.name AS category, users.full_name AS author, recipe.created_at, recipe.updated_at
+            recipe.id, recipe.title, recipe.ingredient, recipe.photo, recipe.category_id, category.name AS category, users.full_name AS author, recipe.created_at, recipe.updated_at, users.profile_picture AS users_photo
         FROM recipe
             JOIN users ON recipe.user_id = users.id
             JOIN category ON recipe.category_id = category.id 
@@ -58,7 +58,7 @@ const showRecipeByUserIdModel = async (id) => {
         FROM recipe
             JOIN users ON recipe.user_id = users.id
             JOIN category ON recipe.category_id = category.id 
-        WHERE recipe.user_id = '${id}'
+        WHERE recipe.user_id = '${id}' ORDER BY created_at DESC
         `,
       (err, res) => {
         if (!err) {
@@ -92,8 +92,8 @@ const searchRecipeDetailModel = async (data) => {
   return new Promise((resolve, reject) =>
     Pool.query(
       `
-        SELECT recipe.id, recipe.title, recipe.ingredient, recipe.photo, category.name AS category, users.full_name AS author,
-            recipe.created_at, recipe.updated_at
+        SELECT recipe.id, recipe.title, recipe.ingredient, recipe.photo, recipe.created_at, recipe.updated_at,
+            category.name AS category, users.full_name AS author, users.profile_picture AS users_photo
         FROM recipe
             JOIN users ON recipe.user_id = users.id
             JOIN category ON recipe.category_id = category.id
@@ -116,7 +116,7 @@ const searchRecipeCountModel = async (data) => {
   console.log("model - searchRecipeCount");
   return new Promise((resolve, reject) =>
     Pool.query(
-      `SELECT * FROM recipe WHERE ${searchBy} ILIKE '%${search}%'`,
+      `SELECT * FROM recipe JOIN category ON recipe.category_id = category.id WHERE ${searchBy} ILIKE '%${search}%'`,
       (err, res) => {
         if (!err) {
           return resolve(res);

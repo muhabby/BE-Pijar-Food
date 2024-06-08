@@ -1,10 +1,21 @@
 <br />
 <p align="center">
-
+  
+<div align="center">
   <h3 align="center">Pijar Food Rest API</h3>
-  <p align="center">
+  
+  <a href="">
     <image align="center" width="200" src='https://res.cloudinary.com/dpasid4jl/image/upload/v1717380554/pijar-food-logo/Pijar_Food_Logo_pwadca.png' />
+  </a>
+
+  <p></p>
+  
+  <p align="center">
+    <a href="https://github.com/muhabby/BE-Pijar-Food/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/muhabby/BE-Pijar-Food/issues">Feature Request</a>
   </p>
+</div>
 
 <!-- TABLE OF CONTENTS -->
 
@@ -67,18 +78,18 @@ https://github.com/muhabby/BE-Pijar-Food.git
 npm install
 ```
 
-3. Add .env file at root folder project, and add following
+3. Add .env file at folder project, and add following
 
 ```sh
 DB_HOST= your db host
 DB_USER= your db username
 DB_NAME= your db name
-DB_PASSWORD= your password
+DB_PASSWORD= your db password
 DB_PORT= your db port
 JWT_TOKEN= fill in the way you want
 PHOTO_NAME= your cloudinary username
 PHOTO_KEY= your cloudinary api key
-PHOTO_SECRET= your cloduinary api secret
+PHOTO_SECRET= your cloudinary api secret
 EMAIL_NAME= name of the email you want to use for nodemailer
 EMAIL_PASS= password of the email you want to use for nodemailer
 ```
@@ -106,5 +117,4 @@ Contributions that make the open source community the best place to learn and cr
 
 ## Contact
 
-- AUTHOR
-  - Muhabby Mulya [@muhabby](https://github.com/muhabby)
+Muhabby Mulya [@muhabby](https://github.com/muhabby)

@@ -50,17 +50,19 @@ const AuthController = {
         email,
         password,
         otp_verif: await otpGen(),
+        profile_picture: 'https://res.cloudinary.com/dpasid4jl/image/upload/v1717426859/general-assets/3_fuibe7.jpg'
       };
 
-      let url = `http://localhost:3000/auth/activated/${data.id}/${data.otp_verif}`;
+      // KARENA EMAIL LAGI BERMASALAH JADI VERIFIKASI EMAIL DI NONAKTIKAN DULU
+      // let url = `http://localhost:3000/auth/activated/${data.id}/${data.otp_verif}`;
 
-      let sendOTP = await sendEmailActivated(email, url, full_name);
+      // let sendOTP = await sendEmailActivated(email, url, full_name);
 
-      if (!sendOTP) {
-        return res
-          .status(404)
-          .json({ status: 404, messages: "Register failed when send email" });
-      }
+      // if (!sendOTP) {
+      //   return res
+      //     .status(404)
+      //     .json({ status: 404, messages: "Register failed when send email" });
+      // }
 
       let result = await inputUsersModel(data);
       res.status(200).json({
@@ -84,7 +86,7 @@ const AuthController = {
     if (user.rowCount === 0) {
       return res
         .status(404)
-        .json({ status: 404, messages: "Email not register" });
+        .json({ status: 404, messages: "Email is not registered" });
     }
 
     let userData = user.rows[0];
@@ -125,7 +127,7 @@ const AuthController = {
       if (user.rowCount === 0) {
         return res
           .status(404)
-          .json({ status: 404, message: "Users not found or id invalid" });
+          .json({ status: 404, message: "Email is not registered" });
       }
 
       let userData = user.rows[0];
