@@ -48,6 +48,7 @@ const RecipeController = {
           .status(404)
           .json({ code: 404, message: "Recipe not found or id invalid" });
       }
+      
       return res.status(200).json({
         code: 200,
         message: "Success showRecipeById",
@@ -75,11 +76,7 @@ const RecipeController = {
       // Process
       let recipe = await showRecipeByUserIdModel(id);
       let result = recipe.rows;
-      if (!result.length) {
-        return res
-          .status(404)
-          .json({ code: 404, message: "User not found or id invalid" });
-      }
+      
       return res.status(200).json({
         code: 200,
         message: "Success showRecipeByUserId",

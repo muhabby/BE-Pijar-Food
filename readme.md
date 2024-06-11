@@ -1,11 +1,12 @@
-<br />
-<p align="center">
-  
+<div id="top"></div>
+
+<!-- PROJECT LOGO -->
+
 <div align="center">
-  <h3 align="center">Pijar Food Rest API</h3>
+  <h3 align="center">Pijar Food Website Static</h3>
   
   <a href="">
-    <image align="center" width="200" src='https://res.cloudinary.com/dpasid4jl/image/upload/v1717380554/pijar-food-logo/Pijar_Food_Logo_pwadca.png' />
+    <image align="center" width="200" src='https://res.cloudinary.com/dpasid4jl/image/upload/v1717380554/pijar-food-assets/pijar-food-logo/Pijar_Food_Logo_pwadca.png' />
   </a>
 
   <p></p>
@@ -21,13 +22,27 @@
 
 ## Table of Contents
 
-- [About the Project](#about-the-project)
-  - [Built With](#built-with)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Related Project](#related-project)
-- [Contact](#contact)
+<div>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#screenshoots">Screenshots</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#related-project">Related Project</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</div>
 
 <!-- ABOUT THE PROJECT -->
 
@@ -117,4 +132,6 @@ Contributions that make the open source community the best place to learn and cr
 
 ## Contact
 
-Muhabby Mulya [@muhabby](https://github.com/muhabby)
+Feel free to connect with me for future collaborations [Muhabby Mulya](https://github.com/muhabby)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
