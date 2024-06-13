@@ -207,7 +207,7 @@ const usersController = {
 
         // Upload photo
         const imageUpload = await cloudinary.uploader.upload(req.file.path, {
-          folder: "users-assets",
+          folder: "pijar-food-database",
         });
 
         // Check if photo not uploaded to cloudinary

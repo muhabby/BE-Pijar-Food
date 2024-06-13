@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 
 <div align="center">
-  <h3 align="center">Pijar Food Website Static</h3>
+  <h3 align="center">Pijar Food Rest API</h3>
   
   <a href="">
     <image align="center" width="200" src='https://res.cloudinary.com/dpasid4jl/image/upload/v1717380554/pijar-food-assets/pijar-food-logo/Pijar_Food_Logo_pwadca.png' />
@@ -38,38 +38,20 @@
       </ul>
     </li>
     <li><a href="#screenshoots">Screenshots</a></li>
-    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#contribution">Contribution</a></li>
     <li><a href="#related-project">Related Project</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </div>
 
-<!-- ABOUT THE PROJECT -->
-
 ## About The Project
 
-Pijar Food Rest API is server api that used in [`Pijar Food Application`](https://pijar-food.vercel.app) . This server manage all function and endpoint in Pijar Food Application such as Create, Read , Update and Delete recipe. This server also facilitates account registration and login to create a profile account.
+Pijar Food Rest API is server api that used in **Pijar Food Web & Mobile** . This server manage all function and endpoint in Pijar Food Application such as Create, Read , Update and Delete recipe. This server also facilitates account registration and login to create a profile account.
 
 ### Built With
 
-- [Node JS](https://nodejs.org/en/docs/)
-- [Express JS](https://expressjs.com/)
-- [Nodemailer Package](https://www.npmjs.com/package/nodemailer)
-- [Cloudinary](https://cloudinary.com/)
-- [Morgan Package](https://www.npmjs.com/package/morgan)
-- [DotEnv Package](https://www.npmjs.com/package/dotenv)
-- [JWT Package](https://www.npmjs.com/package/jsonwebtoken)
-- [UUID Package](https://www.npmjs.com/package/uuid)
-- [Multer Package](https://www.npmjs.com/package/multer)
-- [Argon2 Package](https://www.npmjs.com/package/argon2)
-- [Body-parser Package](https://www.npmjs.com/package/body-parser)
-- [Cors Package](https://www.npmjs.com/package/cors)
-- [Helmet Package](https://www.npmjs.com/package/helmet)
-- [Pg Package](https://www.npmjs.com/package/pg)
-- [Xss-clean](https://www.npmjs.com/package/xss-clean)
-- [OTP-gen-agent](https://www.npmjs.com/package/otp-gen-agent)
-
-<!-- GETTING STARTED -->
+- [Node.Js](https://nodejs.org/)
+- [Express.Js](https://expressjs.com/)
 
 ## Getting Started
 
@@ -77,41 +59,145 @@ Pijar Food Rest API is server api that used in [`Pijar Food Application`](https:
 
 This is an example of how to list things you need to use the server and how to install.
 
-- [nodejs](https://nodejs.org/en/download/)
+- [Node.Js](https://nodejs.org/en/download/)
 
 ### Installation
 
-1. Clone the repo
-
+- Clone the repo
 ```sh
-https://github.com/muhabby/BE-Pijar-Food.git
+git clone https://github.com/muhabby/BE-Pijar-Food.git
 ```
 
-2. Install NPM packages
-
+- Install Module
 ```sh
 npm install
 ```
 
-3. Add .env file at folder project, and add following
-
+- Setup .env
 ```sh
-DB_HOST= your db host
-DB_USER= your db username
-DB_NAME= your db name
-DB_PASSWORD= your db password
-DB_PORT= your db port
-JWT_TOKEN= fill in the way you want
-PHOTO_NAME= your cloudinary username
-PHOTO_KEY= your cloudinary api key
-PHOTO_SECRET= your cloudinary api secret
-EMAIL_NAME= name of the email you want to use for nodemailer
-EMAIL_PASS= password of the email you want to use for nodemailer
+DB_HOST= "db host"
+DB_USER= "db username"
+DB_NAME= "db name"
+DB_PASSWORD= "db password"
+DB_PORT= "db port"
+JWT_TOKEN= "fill in random text"
+PHOTO_NAME= "cloudinary username"
+PHOTO_KEY= "cloudinary api key"
+PHOTO_SECRET= "cloudinary api secret"
+EMAIL_NAME= "name of the email to use for nodemailer"
+EMAIL_PASS= "password of the email to use for nodemailer"
 ```
 
-<!-- CONTRIBUTING -->
+- Start Project
+```sh
+npm run dev
+```
 
-## Contributing
+## Screenshoots
+
+Here are some projects that use Pijar Food Rest API.
+
+<h4 align="center">Pijar Food Website</h4>
+<p align="center" display=flex>
+    <table>
+        <tr>
+            <td align="center">Landing Page</td>
+            <td align="center">Login Page</td>
+        </tr>
+        <tr>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1717984073/pijar-food-logo/Landing_Page_pn6k17.png" alt="Landing Page" width=100%></td>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1717984070/pijar-food-logo/Login_ufze1n.png" alt="Login Page" width=100%/></td>
+        </tr>
+        <tr>
+            <td align="center">Regist Page</td>
+            <td align="center">Home</td>
+        </tr>
+        <tr>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1717984072/pijar-food-logo/Regist_h5lrog.png" alt="Regist Page" width=100%></td>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1717984071/pijar-food-logo/home_ot3vmw.png" alt="Home" width=100%/></td>
+        </tr>
+        <tr>
+            <td align="center">Add Recipe</td>
+            <td align="center">My Recipe</td>
+        </tr>
+        <tr>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1717984069/pijar-food-logo/Add_Recipe_selzpi.png" alt="Add Recipe" width=100%></td>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1717984073/pijar-food-logo/My_Recipe_fvzfsl.png" alt="My Recipe" width=100%/></td>
+        </tr>
+        <tr>
+            <td align="center">Search Recipe</td>
+            <td align="center">Detail Recipe</td>
+        </tr>
+        <tr>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1717984072/pijar-food-logo/Search_re6gfx.png" alt="Search Recipe" width=100%></td>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1717984073/pijar-food-logo/Detail_Recipe_s13trr.png" alt="Detail Recipe" width=100%/></td>
+        </tr>
+        <tr>
+            <td align="center">Edit and Delete Recipe</td>
+            <td align="center">Edit Profile</td>
+        </tr>
+        <tr>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1717984204/pijar-food-logo/Edit_and_Delete_jexe7m.png" alt="Edit and Delete Recipe" width=100%></td>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1717984071/pijar-food-logo/Update_Profile_jw8rkh.png" alt="Edit Profile" width=100%/></td>
+        </tr>
+    </table>  
+</p>
+
+<h4 align="center">Pijar Food Mobile</h4>
+<p align="center" display=flex>
+    <table>
+        <tr align="center">
+            <td>Login</td>
+            <td>Regist</td>
+        </tr>
+        <tr align="center">
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1718246832/pijar-food-assets/ss-pijar-food-mobile/Login_a1jtof.jpg" alt="Login" width=50%></td>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1718246835/pijar-food-assets/ss-pijar-food-mobile/Regist_bahd05.jpg" alt="Regist" width=50%/></td>
+        </tr>
+        <tr align="center">
+            <td>Home</td>
+            <td>Search Recipe</td>
+        </tr>
+        <tr align="center">
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1718246832/pijar-food-assets/ss-pijar-food-mobile/Home_uetjuc.jpg" alt="Home" width=50%></td>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1718246832/pijar-food-assets/ss-pijar-food-mobile/Search_bh21yc.jpg" alt="Search Recipe" width=50%/></td>
+        </tr>
+        <tr align="center">
+            <td>Add Recipe</td>
+            <td>Profile</td>
+        </tr>
+        <tr align="center">
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1718246827/pijar-food-assets/ss-pijar-food-mobile/Add_Recipe_b1safs.jpg" alt="Add Recipe" width=50%></td>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1718246833/pijar-food-assets/ss-pijar-food-mobile/Profile_jnqm3y.jpg" alt="Profile" width=50%/></td>
+        </tr>
+        <tr align="center">
+            <td>Detail Recipe</td>
+            <td>List Recipes</td>
+        </tr>
+        <tr align="center">
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1718246831/pijar-food-assets/ss-pijar-food-mobile/Detail_Recipe_gxt7by.jpg" alt="Detail Recipe" width=50%></td>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1718246831/pijar-food-assets/ss-pijar-food-mobile/List_Recipes_bvjtqr.jpg" alt="List Recipe" width=50%/></td>
+        </tr>
+        <tr align="center">
+            <td>Filter Recipes by Category</td>
+            <td>Edit Profile</td>
+        </tr>
+        <tr align="center"> 
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1718246828/pijar-food-assets/ss-pijar-food-mobile/Filter_Recipes_k5ibzu.jpg" alt="Filter Recipe by Category" width=50%></td>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1718246831/pijar-food-assets/ss-pijar-food-mobile/Edit_Profile_nim0bq.jpg" alt="Edit Profile" width=50%/></td>
+        </tr>
+        <tr align="center">
+            <td>My Recipes</td>
+            <td>Edit & Delete Recipe</td>
+        </tr>
+        <tr align="center">
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1718247466/pijar-food-assets/ss-pijar-food-mobile/My_Recipes_o182w0.jpg" alt="My Recipe" width=50%></td>
+            <td><image src="https://res.cloudinary.com/dpasid4jl/image/upload/v1718246831/pijar-food-assets/ss-pijar-food-mobile/Edit_Delete_Recipe_ai70z8.jpg" alt="Edit & Delete Recipe" width=50%/></td>
+        </tr>
+    </table>  
+</p>
+
+## Contribution
 
 Contributions that make the open source community the best place to learn and create. Every contribution you make is valuable.
 
@@ -121,14 +207,12 @@ Contributions that make the open source community the best place to learn and cr
 4. Push to the Branch (`git push origin feature/yourbranch`)
 5. Open a Pull Request
 
-<!-- RELATED PROJECT -->
-
 ## Related Project
 
-- [`Pijar Food Demo`](https://pijar-food.vercel.app)
-- [`Pijar Food Frontend Repository`](https://github.com/muhabby/Pijar-Food)
-
-<!-- CONTACT -->
+- [`Pijar Food Website Demo`](https://pijar-food.vercel.app)
+- [`Pijar Food Mobile Download`](https://drive.google.com/file/d/1K99DPe7h_4NGWsueDqpKEDLqm2gAZC0B/view?usp=sharing)
+- [`Pijar Food Web Frontend Repository`](https://github.com/muhabby/Pijar-Food)
+- [`Pijar Food Mobile Repository`](https://github.com/muhabby/Pijar-Food-Mobile)
 
 ## Contact
 

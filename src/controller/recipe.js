@@ -213,7 +213,7 @@ const RecipeController = {
 
       // Upload photo using cloudinary
       const imageUpload = await cloudinary.uploader.upload(req.file.path, {
-        folder: "recipe-assets",
+        folder: "pijar-food-database",
       });
 
       // Check if photo not uploaded to cloudinary
@@ -310,7 +310,7 @@ const RecipeController = {
 
         // Upload photo
         const imageUpload = await cloudinary.uploader.upload(req.file.path, {
-          folder: "recipe-assets",
+          folder: "pijar-food-database",
         });
 
         // Check if photo not uploaded to cloudinary
