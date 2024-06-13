@@ -58,7 +58,7 @@ Before going to the installation stage there are some software that must be inst
 
 ### Installation
 
-- Clone the repo
+- Clone Repository
 ```sh
 git clone https://github.com/muhabby/BE-Pijar-Food.git
 ```
