@@ -1,7 +1,5 @@
 <div id="top"></div>
 
-<!-- PROJECT LOGO -->
-
 <div align="center">
   <h3 align="center">Pijar Food Rest API</h3>
   
@@ -17,8 +15,6 @@
     <a href="https://github.com/muhabby/BE-Pijar-Food/issues">Feature Request</a>
   </p>
 </div>
-
-<!-- TABLE OF CONTENTS -->
 
 ## Table of Contents
 
@@ -56,7 +52,7 @@ Pijar Food Rest API is server api that used in **Pijar Food Web & Mobile** . Thi
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the server and how to install.
+Before going to the installation stage there are some software that must be installed first.
 
 - [Node.Js](https://nodejs.org/en/download/)
 
@@ -208,10 +204,10 @@ Contributions that make the open source community the best place to learn and cr
 
 ## Related Project
 
-- [`Pijar Food Website Demo`](https://pijar-food.vercel.app)
-- [`Pijar Food Mobile Download`](https://drive.google.com/file/d/1K99DPe7h_4NGWsueDqpKEDLqm2gAZC0B/view?usp=sharing)
-- [`Pijar Food Web Frontend Repository`](https://github.com/muhabby/Pijar-Food)
-- [`Pijar Food Mobile Repository`](https://github.com/muhabby/Pijar-Food-Mobile)
+- [Pijar Food Website Demo](https://pijar-food.vercel.app)
+- [Pijar Food Mobile Download](https://drive.google.com/file/d/1K99DPe7h_4NGWsueDqpKEDLqm2gAZC0B/view?usp=sharing)
+- [Pijar Food Web Frontend Repository](https://github.com/muhabby/Pijar-Food)
+- [Pijar Food Mobile Repository](https://github.com/muhabby/Pijar-Food-Mobile)
 
 ## Contact
 
