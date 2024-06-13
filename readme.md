@@ -50,7 +50,6 @@ Pijar Food Rest API is server api that used in **Pijar Food Web & Mobile** . Thi
 
 ### Built With
 
-- [Node.Js](https://nodejs.org/)
 - [Express.Js](https://expressjs.com/)
 
 ## Getting Started

@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "4d84b688-5b0c-40b9-b55f-982f957fe649",
-		"name": "Pijar Food Database",
+		"name": "Pijar Food API",
 		"description": "By Muhabby Mulya",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "33167825"
@@ -20,28 +20,26 @@
 							"urlencoded": [
 								{
 									"key": "full_name",
-									"value": "Muhabby",
+									"value": "aa",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "muhabbymulya@gmail.com",
+									"value": "testus",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "muh123",
+									"value": "aaa",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/auth/register",
-							"protocol": "http",
+							"raw": "{{base_url}}/auth/register",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"auth",
 								"register"
@@ -60,23 +58,21 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "muhabbymulya@gmail.com",
+									"value": "testuser@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "pwbaru",
+									"value": "testuser",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/auth/login",
-							"protocol": "http",
+							"raw": "{{base_url}}/auth/login",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"auth",
 								"login"
@@ -101,12 +97,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/auth/otpRequest",
-							"protocol": "http",
+							"raw": "{{base_url}}/auth/otpRequest",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"auth",
 								"otpRequest"
@@ -136,12 +130,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/auth/otpInput",
-							"protocol": "http",
+							"raw": "{{base_url}}/auth/otpInput",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"auth",
 								"otpInput"
@@ -152,13 +144,16 @@
 				},
 				{
 					"name": "Reset Password",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlNTFjYzQwLTE5YmMtNDkxMC04MjdiLTZjMGQ3MDQ4NWIwMCIsImZ1bGxfbmFtZSI6Ik11aGFiYnkiLCJlbWFpbCI6Im11aGFiYnltdWx5YUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiRhcmdvbjJpZCR2PTE5JG09NjU1MzYsdD0zLHA9NCRhYTdvYkFzNnd3VFJCNWlIbnk4L1ZRJFV2RzEwcW01VWRETnAraTU1aFpoRDNxRXFBTCs1TG1ROVJRbmdXZC9QbmciLCJwcm9maWxlX3BpY3R1cmUiOm51bGwsImJpbyI6bnVsbCwiY3JlYXRlZF9hdCI6IjIwMjQtMDYtMDJUMTY6NTk6MjAuNjE0WiIsInVwZGF0ZWRfYXQiOm51bGwsIm90cF92ZXJpZiI6IjY2MzgzNiIsImlzX3ZlcmlmIjp0cnVlLCJpYXQiOjE3MTczNDQwMzR9.KgF007TsHKxdaQqbbPLFaMtCNYxPGeesiRrvNbD0a7E",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQzYzg4YzU4LTc5MTEtNDdhMi1hOGZmLTJkODg3NWMzYWE1ZCIsImZ1bGxfbmFtZSI6Ik11aGFiYnkgTXVsIiwiZW1haWwiOiJtdWhAZ21haWwuY29tIiwicHJvZmlsZV9waWN0dXJlIjoiaHR0cHM6Ly9yZXMuY2xvdWRpbmFyeS5jb20vZHBhc2lkNGpsL2ltYWdlL3VwbG9hZC92MTcxNzY5MTE2OS91c2Vycy1hc3NldHMveW1zaTJteDM3cWhrd3hlYjJnd3ouanBnIiwiYmlvIjoibnVsbCIsImNyZWF0ZWRfYXQiOiIyMDI0LTAzLTIzVDIxOjIwOjUxLjgxN1oiLCJ1cGRhdGVkX2F0IjoiMjAyNC0wNi0wNlQxNzoyNjowOS44NTBaIiwib3RwX3ZlcmlmIjpudWxsLCJpc192ZXJpZiI6bnVsbCwiaWF0IjoxNzE3NjkzNzI1fQ.otiUJWs6uwEXQx-z5oG_PUccWc-jp62I7ORg5vDYZ1w",
 									"type": "string"
 								}
 							]
@@ -175,18 +170,16 @@
 								},
 								{
 									"key": "confirmPassword",
-									"value": "pwbaru",
+									"value": "pw",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/auth/resetPassword",
-							"protocol": "http",
+							"raw": "{{base_url}}/auth/resetPassword",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"auth",
 								"resetPassword"
@@ -257,7 +250,8 @@
 									"\r",
 									"pm.visualizer.set(template, constructVisualizerPayload());"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -265,12 +259,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users",
-							"protocol": "http",
+							"raw": "{{base_url}}/users",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users"
 							]
@@ -337,16 +329,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://be-pijar-food.vercel.app/users/5e51cc40-19bc-4910-827b-6c0d70485b00",
-							"protocol": "https",
+							"raw": "{{base_url}}/users/d3c88c58-7911-47a2-a8ff-2d8875c3aa5d",
 							"host": [
-								"be-pijar-food",
-								"vercel",
-								"app"
+								"{{base_url}}"
 							],
 							"path": [
 								"users",
-								"5e51cc40-19bc-4910-827b-6c0d70485b00"
+								"d3c88c58-7911-47a2-a8ff-2d8875c3aa5d"
 							]
 						}
 					},
@@ -410,12 +399,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users/detail?search=&searchBy=full_name&sortBy=regist_date&sort=ASC&limit=5&page=1",
-							"protocol": "http",
+							"raw": "{{base_url}}/users/detail?search=&searchBy=full_name&sortBy=regist_date&sort=ASC&limit=5&page=1",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
 								"detail"
@@ -469,12 +456,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users/55c3f566-1725-4bc7-96b0-3596faf39f90",
-							"protocol": "http",
+							"raw": "{{base_url}}/users/55c3f566-1725-4bc7-96b0-3596faf39f90",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
 								"55c3f566-1725-4bc7-96b0-3596faf39f90"
@@ -491,7 +476,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQzYzg4YzU4LTc5MTEtNDdhMi1hOGZmLTJkODg3NWMzYWE1ZCIsImZ1bGxfbmFtZSI6Ik11aGFiYnkgTSIsImVtYWlsIjoibXVoQGdtYWlsLmNvbSIsInByb2ZpbGVfcGljdHVyZSI6bnVsbCwiYmlvIjoibnVsbCIsImNyZWF0ZWRfYXQiOiIyMDI0LTAzLTI0VDA0OjIwOjUxLjgxN1oiLCJ1cGRhdGVkX2F0IjoiMjAyNC0wNC0wNFQwMzowNzoyMi45MDVaIiwiaWF0IjoxNzE1MzQ4NTQyfQ.daEc3YwU01Cd1LlQKxd6fJSp0l8rcezReNSj9lfbM9w",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQzYzg4YzU4LTc5MTEtNDdhMi1hOGZmLTJkODg3NWMzYWE1ZCIsImZ1bGxfbmFtZSI6Ik11aGFiYnkgVWJhaCIsImVtYWlsIjoibXVoQGdtYWlsLmNvbSIsInByb2ZpbGVfcGljdHVyZSI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2RwYXNpZDRqbC9pbWFnZS91cGxvYWQvdjE3MTUzNDg4NTUvdXNlcnMtYXNzZXRzL3E4dnlsZTFpaXh2czRoNHpmaWRtLmpwZyIsImJpbyI6Im51bGwiLCJjcmVhdGVkX2F0IjoiMjAyNC0wMy0yM1QyMToyMDo1MS44MTdaIiwidXBkYXRlZF9hdCI6IjIwMjQtMDYtMDVUMTQ6MDQ6NDcuNjc3WiIsIm90cF92ZXJpZiI6bnVsbCwiaXNfdmVyaWYiOm51bGwsImlhdCI6MTcxNzY4MjE5MH0.JpCT-o2loLJX-mIlAJDj7ZBz21aBsZEKJ12mrMiM-KA",
 									"type": "string"
 								}
 							]
@@ -503,12 +488,12 @@
 							"formdata": [
 								{
 									"key": "full_name",
-									"value": "Muhabby Mulya",
+									"value": "Muhabby New",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "",
+									"value": "testmuh@gmail.com",
 									"type": "text"
 								},
 								{
@@ -524,17 +509,15 @@
 								{
 									"key": "bio",
 									"value": "",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "https://be-pijar-food.vercel.app/users",
-							"protocol": "https",
+							"raw": "{{base_url}}/users",
 							"host": [
-								"be-pijar-food",
-								"vercel",
-								"app"
+								"{{base_url}}"
 							],
 							"path": [
 								"users"
@@ -614,12 +597,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/recipe",
-							"protocol": "http",
+							"raw": "{{base_url}}/recipe",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"recipe"
 							]
@@ -633,12 +614,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/recipe/58eae9ca-4bba-4a04-a0c4-61b795592aa9",
-							"protocol": "http",
+							"raw": "{{base_url}}/recipe/58eae9ca-4bba-4a04-a0c4-61b795592aa9",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"recipe",
 								"58eae9ca-4bba-4a04-a0c4-61b795592aa9"
@@ -653,16 +632,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/recipe/user/d3c88c58-7911-47a2-a8ff-2d8875c3aa5d",
-							"protocol": "http",
+							"raw": "{{base_url}}/recipe/user/53b2d7fd-0d86-4dee-adcb-e1b917741b0f",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"recipe",
 								"user",
-								"d3c88c58-7911-47a2-a8ff-2d8875c3aa5d"
+								"53b2d7fd-0d86-4dee-adcb-e1b917741b0f"
 							]
 						}
 					},
@@ -718,16 +695,21 @@
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
 						"url": {
-							"raw": "http://localhost:3000/recipe/detail?search=&searchBy=title&sortBy=title&sort=ASC&limit=2&page=1",
-							"protocol": "http",
+							"raw": "{{base_url}}/recipe/detail?search=&searchBy=title&sortBy=created_at&sort=DESC&limit=10&page=1",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"recipe",
 								"detail"
@@ -744,17 +726,17 @@
 								},
 								{
 									"key": "sortBy",
-									"value": "title",
-									"description": "title | created_at | updated_at"
+									"value": "created_at",
+									"description": "created_at | updated_at"
 								},
 								{
 									"key": "sort",
-									"value": "ASC",
+									"value": "DESC",
 									"description": "ASC | DESC"
 								},
 								{
 									"key": "limit",
-									"value": "2"
+									"value": "10"
 								},
 								{
 									"key": "page",
@@ -781,12 +763,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/recipe/86c9473a-a72a-48ac-a228-1b2662a63dab",
-							"protocol": "http",
+							"raw": "{{base_url}}/recipe/86c9473a-a72a-48ac-a228-1b2662a63dab",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"recipe",
 								"86c9473a-a72a-48ac-a228-1b2662a63dab"
@@ -815,34 +795,32 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "Salad",
+									"value": "",
 									"type": "text"
 								},
 								{
 									"key": "ingredient",
-									"value": "Buah, Sayur, Wortel, Kacang, Jagung",
+									"value": "",
 									"type": "text"
 								},
 								{
 									"key": "photo",
 									"type": "file",
-									"src": "/C:/Users/muhab/Downloads/Peworld Logo.png"
+									"src": []
 								},
 								{
 									"key": "category_id",
-									"value": "3",
+									"value": "",
 									"description": "1 : Desert | 2 : Main Course | 3 : Appetizer",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/recipe",
-							"protocol": "http",
+							"raw": "{{base_url}}/recipe",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"recipe"
 							]
@@ -870,7 +848,7 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "Nasi goreng gila",
+									"value": "",
 									"type": "text"
 								},
 								{
@@ -892,12 +870,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/recipe/559ca344-1179-45d5-815c-997dae505ffe",
-							"protocol": "http",
+							"raw": "{{base_url}}/recipe/559ca344-1179-45d5-815c-997dae505ffe",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"recipe",
 								"559ca344-1179-45d5-815c-997dae505ffe"
@@ -956,7 +932,8 @@
 									"\r",
 									"pm.visualizer.set(template, constructVisualizerPayload());"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -964,12 +941,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/category",
-							"protocol": "http",
+							"raw": "{{base_url}}/category",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"category"
 							]
@@ -1019,7 +994,8 @@
 									"\r",
 									"pm.visualizer.set(template, constructVisualizerPayload());"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -1027,12 +1003,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/category/589d02de-4c57-4e3e-9cae-7d816040db0a",
-							"protocol": "http",
+							"raw": "{{base_url}}/category/589d02de-4c57-4e3e-9cae-7d816040db0a",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"category",
 								"589d02de-4c57-4e3e-9cae-7d816040db0a"
@@ -1086,7 +1060,8 @@
 									"",
 									"pm.visualizer.set(template, constructVisualizerPayload());"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -1094,12 +1069,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/category/detail?search=des&searchBy=name&sortBy=created_at&sort=ASC&limit=1&page=1",
-							"protocol": "http",
+							"raw": "{{base_url}}/category/detail?search=des&searchBy=name&sortBy=created_at&sort=ASC&limit=1&page=1",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"category",
 								"detail"
@@ -1143,12 +1116,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/category/589d02de-4c57-4e3e-9cae-7d816040db0a",
-							"protocol": "http",
+							"raw": "{{base_url}}/category/589d02de-4c57-4e3e-9cae-7d816040db0a",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"category",
 								"589d02de-4c57-4e3e-9cae-7d816040db0a"
@@ -1183,12 +1154,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/category",
-							"protocol": "http",
+							"raw": "{{base_url}}/category",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"category"
 							]
@@ -1222,12 +1191,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/category/2",
-							"protocol": "http",
+							"raw": "{{base_url}}/category/2",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"category",
 								"2"
