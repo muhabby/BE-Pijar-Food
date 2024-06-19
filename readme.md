@@ -47,6 +47,9 @@ Pijar Food Rest API is server api that used in **Pijar Food Web & Mobile** . Thi
 ### Built With
 
 - [Express.Js](https://expressjs.com/)
+- [Nodemon](https://nodemon.io/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Cloudinary](https://cloudinary.com/)
 
 ## Getting Started
 
